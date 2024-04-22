@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Hi</h1>
+	<h1>JSP is working</h1>
+	<form action="">
+		<label for="test">Button</label>
+		<input type="button" id="test" name="test" value="test">
+	</form>
 </body>
 </html>
