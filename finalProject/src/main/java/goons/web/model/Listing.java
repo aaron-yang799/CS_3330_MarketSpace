@@ -14,7 +14,6 @@ public class Listing {
 	
 	public Listing(String title, LocalDate timePosted, LocalDate timeEnd, ArrayList<String> description,
 			float minimumBid, float buyOutPrice, ArrayList<Bid> bidList, ArrayList<User> watchList) {
-		super();
 		this.title = title;
 		this.timePosted = timePosted;
 		this.timeEnd = timeEnd;
