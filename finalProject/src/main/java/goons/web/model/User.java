@@ -8,20 +8,18 @@ public class User {
 	private String email;
 	private ArrayList<Listing> ListingList;
 	private float wallet;
-	private ArrayList<String> AddressList;
+	private String address;
 	private ArrayList<Bid> BidList;
 	private ArrayList<Order> OrderList;
 	private ArrayList<Listing> WatchList;
 	
-	public User(String username, String hashKey, String email, ArrayList<Listing> listingList, float wallet,
-			ArrayList<String> addressList, ArrayList<Bid> bidList, ArrayList<Order> orderList,
-			ArrayList<Listing> watchList) {
+	public User(String username, String hashKey, String email,float wallet, String address) {
 		this.username = username;
 		this.hashKey = hashKey;
 		this.email = email;
 		this.ListingList = new ArrayList<Listing>();
 		this.wallet = wallet;
-		this.AddressList = new ArrayList<String>();
+		this.address = address;
 		this.BidList = new ArrayList<Bid>();
 		this.OrderList = new ArrayList<Order>();
 		this.WatchList = new ArrayList<Listing>();
@@ -67,12 +65,12 @@ public class User {
 		this.wallet = wallet;
 	}
 
-	public ArrayList<String> getAddressList() {
-		return AddressList;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setAddressList(ArrayList<String> addressList) {
-		AddressList = addressList;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public ArrayList<Bid> getBidList() {

@@ -12,8 +12,7 @@ public class Listing {
 	private ArrayList<Bid> bidList;
 	private ArrayList<User> watchList;
 	
-	public Listing(String title, LocalDate timePosted, LocalDate timeEnd, ArrayList<String> description,
-			float minimumBid, float buyOutPrice, ArrayList<Bid> bidList, ArrayList<User> watchList) {
+	public Listing(String title, LocalDate timePosted, LocalDate timeEnd, float minimumBid, float buyOutPrice) {
 		this.title = title;
 		this.timePosted = timePosted;
 		this.timeEnd = timeEnd;
@@ -22,6 +21,17 @@ public class Listing {
 		this.buyOutPrice = buyOutPrice;
 		this.bidList = new ArrayList<Bid>();
 		this.watchList = new ArrayList<User>();
+	}
+	
+	public Listing(Listing listing) {
+		this.title = listing.title;
+		this.timePosted = listing.timePosted;
+		this.timeEnd = listing.timeEnd;
+		this.description = listing.description;
+		this.minimumBid = listing.minimumBid;
+		this.buyOutPrice = listing.buyOutPrice;
+		this.bidList = listing.bidList;
+		this.watchList = listing.watchList;
 	}
 
 	public String getTitle() {
@@ -88,7 +98,16 @@ public class Listing {
 		this.watchList = watchList;
 	}
 	
-	
+	public float getHighestBid() {
+		float highestBid = (float) 0.00;
+		
+		for(Bid bid : this.bidList) {
+			if(bid.getAmountBidded() > highestBid) {
+				highestBid = bid.getAmountBidded();
+			}
+		}
+		return highestBid;
+	}
 	
 	
 }
