@@ -23,7 +23,6 @@ public class SignUpDao {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://auctiondb.cnge86iqy455.us-east-2.rds.amazonaws.com:3306/Auction_DB", "admin", "auctionDB");
-			System.out.println("what");
 
 			PreparedStatement ps = con.prepareStatement("INSERT INTO Auction_User (Username, HashedPass, Email, Wallet) VALUES (?, ?, ?, ?)");
 			ps.setString(1, this.name);
