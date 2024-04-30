@@ -18,7 +18,7 @@
 	<div class='d-flex justify-content-center align-items-center vh-100 dopeassbg'>
         <div class='bg-white p-3 rounded w-25'>
             <h2>Sign-Up</h2>
-            <form action="" onSubmit={handleSubmit}>
+            <form action="SignUpServlet" method="post">
                 <div class='mb-3'>
                     <label for="name"><strong>Name</strong></label>
                     <input type="text" placeholder='Enter Name' name='name' class='form-control rounded-0'/>

@@ -11,7 +11,7 @@ import goons.web.model.DatabaseConnection;
 
 public class exampleDao {
 	
-	 public void insertData(String Username, String HashedPass, String Email, float Wallet) {
+	 public void insertData(String Username, String HashedPass, String Email) {
 	        String sql = "INSERT INTO Auction_User (Username, HashedPass, Email, Wallet) VALUES (?, ?, ?, ?)";
 
 	        try (Connection conn = DatabaseConnection.getConnection();
@@ -20,7 +20,7 @@ public class exampleDao {
 	               pstmt.setString(1, Username);
 	               pstmt.setString(2, HashedPass);
 	               pstmt.setString(3, Email);
-	               pstmt.setFloat(4, Wallet);
+	               pstmt.setFloat(4, (float) 0.00);
 	               
 	               int affectedRows = pstmt.executeUpdate(); // Execute the insertion
 	               
