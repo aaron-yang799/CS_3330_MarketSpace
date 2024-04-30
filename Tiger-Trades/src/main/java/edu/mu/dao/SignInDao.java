@@ -20,8 +20,8 @@ public class SignInDao {
 	public boolean Authenticate() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://auctiondb.cnge86iqy455.us-east-2.rds.amazonaws.com:3306/Auction_DB?useSSL=false");
-			PreparedStatement ps = con.prepareStatement("SELECT HashedPass FROM Auction_DB WHERE Email = ?");
+			Connection con = DriverManager.getConnection("jdbc:mysql://auctiondb.cnge86iqy455.us-east-2.rds.amazonaws.com:3306/Auction_DB", "admin", "auctionDB");
+			PreparedStatement ps = con.prepareStatement("SELECT HashedPass FROM Auction_User WHERE Email = ?");
 			ps.setString(1, this.email);
 			ResultSet rs = ps.executeQuery();
 		

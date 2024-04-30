@@ -22,7 +22,7 @@ public class SignInServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("signIn.jsp");
 			rd.forward(request, response);
 		}
 	}
