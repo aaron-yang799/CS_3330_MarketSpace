@@ -21,16 +21,20 @@ public class SignInDao {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://auctiondb.cnge86iqy455.us-east-2.rds.amazonaws.com:3306/Auction_DB?useSSL=false");
-			PreparedStatement ps = con.prepareStatement("SELECT FROM HashedPass FROM Auction_DB WHERE Email = ?");
+			PreparedStatement ps = con.prepareStatement("SELECT HashedPass FROM Auction_DB WHERE Email = ?");
 			ps.setString(1, this.email);
 			ResultSet rs = ps.executeQuery();
 		
 			if(rs.next()) {
 				String HashedPass = rs.getString("HashedPass");
 				if(BCrypt.checkpw(this.password, HashedPass)) {
+					ps.close();
+					con.close();
 					return true;
 				}
 			}else {
+				ps.close();
+				con.close();
 				return false;
 			}
 			
