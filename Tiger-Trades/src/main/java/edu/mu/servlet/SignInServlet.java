@@ -31,7 +31,7 @@ public class SignInServlet extends HttpServlet {
 	    } else {
 	        // Authentication failed
 	        request.setAttribute("error", "Invalid username or password");
-	        request.getRequestDispatcher("login.jsp").forward(request, response);
+	        request.getRequestDispatcher("signIn.jsp").forward(request, response);
 	    }
 	}
 
