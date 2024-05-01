@@ -65,13 +65,17 @@
 						    User user = (User) userObj; // Cast it to the User class, under the assumption there's a User class
 						    if (user.getUsername() != null) 				 // Make sure to use the correct method to get username
 						    {
-						            out.println("Hey, " + user.getUsername() + "!");
+							%>
+						    
+						    	<a href="index.jsp"><%=("Hey, " + user.getUsername() + "!").toString()%></a>
+						    <%
 						    }
-						   else {
-						        %>
-						            <a href="signIn.jsp">Login</a> | <a href="signUp.jsp">Register</a>
-						        <%
-						    }
+						   else 
+						   {
+						   %>
+						   		<a href="signIn.jsp">Login</a> | <a href="signUp.jsp">Register</a>
+						   <%
+						   }
 						%>
                         
                         <!-- <a href="#">User</a> -->
