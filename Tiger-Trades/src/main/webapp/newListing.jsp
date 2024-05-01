@@ -6,6 +6,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 <style>
 
 	body {
@@ -25,7 +28,7 @@
 		width: 40%;		
 		border-radius: 15px;
 	}
-	
+
 </style>
 </head>
 <body>
@@ -45,10 +48,19 @@
 	                <div class='mb-3'>
     					<textarea name="description" style="resize: none;" maxlength="500" rows="8" class="form-control rounded"  placeholder="Enter Description Here..."></textarea>
 	                </div>
+	                <div class='mb-3'>
+						<label for="dateEnd"><strong>Listing End Date</strong></label>
+	                	<input type="text" id="datepicker" name="dateEnd" class="form-control" placeholder="Click to Enter Date">
+	                </div>
 	                <button type='submit' class='btn btn-success w-100'><strong>Create Listing!</strong></button>
 			   	</form>
        		</div>
 	    </div>
 	</div>
+	<script>
+	    $(function() {
+	        $("#datepicker").datepicker();
+	    });
+	</script>
 </body>
 </html>
