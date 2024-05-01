@@ -8,36 +8,40 @@ import java.sql.SQLException;
 
 import org.mindrot.jbcrypt.BCrypt;
 
+import edu.mu.model.User;
+
 public class SignInDao {
 	private String email;
 	private String password;
+
 	
 	public SignInDao(String email, String password) {
 		this.email = email;
 		this.password = password;
 	}
 	
-	public boolean Authenticate() {
+	public User Authenticate() {
 		try {
-			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT HashedPass FROM Auction_User WHERE Email = ?");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT HashedPass, User_ID , Username, Wallet, Address FROM Auction_User WHERE Email = ?");
 			ps.setString(1, this.email);
 			ResultSet rs = ps.executeQuery();
 		
 			if(rs.next()) {
 				String HashedPass = rs.getString("HashedPass");
 				if(BCrypt.checkpw(this.password, HashedPass)) {
+					User user = new User(rs.getInt("User_ID"), rs.getString("Username"), this.email, rs.getFloat("Wallet"), rs.getString("address"));
 					ps.close();
-					return true;
+					return user;
 				}
 			}else {
 				ps.close();
-				return false;
+				return null;
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return false;
+		return null;
 	}
 	
 	

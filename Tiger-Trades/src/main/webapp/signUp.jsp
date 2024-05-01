@@ -31,6 +31,10 @@
                     <label for="password"><strong>Password</strong></label>
                     <input type="password" placeholder='Enter Password' name='password' class='form-control rounded-0'/>
                 </div>
+                <div class='mb-3'>
+                    <label for="address"><strong>Address</strong></label>
+                    <input type="text" placeholder='Enter Address' name='address' class='form-control rounded-0'/>
+                </div>
                 <button type='submit' class='btn btn-success w-100'><strong>Create Account</strong></button>
                 <p class='mb-1 mt-1'>You are agreeing to our terms and policies.</p>
                 <span>Already a member?		<a href='signIn.jsp'>Sign In</a></span>

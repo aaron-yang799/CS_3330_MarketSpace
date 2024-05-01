@@ -16,7 +16,7 @@ public class SignUpServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SignUpDao SignUp = new SignUpDao(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"));
+		SignUpDao SignUp = new SignUpDao(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"), request.getParameter("address"));
 		SignUp.SignUp();
 		RequestDispatcher rd = request.getRequestDispatcher("signIn.jsp");
 		rd.forward(request, response);
