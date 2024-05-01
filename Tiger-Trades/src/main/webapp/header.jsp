@@ -15,6 +15,7 @@
        width: 100%;
        top: 0;
        left: 0;
+       z-index: 1000;
 	}
 	.title-container, .link-container {
 		display: flex;
@@ -23,6 +24,7 @@
 	.title {
 		font-size: 24px; /* Medium size */
 		margin: 0;
+		font-family: 'Graphik';
 	}
 	.title {
 		color: #FFD700;
