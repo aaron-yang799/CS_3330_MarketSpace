@@ -34,4 +34,14 @@
     <servlet-name>createListingServelt</servlet-name>
     <url-pattern>/createListingServelt</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreateListingServlet</display-name>
+    <servlet-name>CreateListingServlet</servlet-name>
+    <servlet-class>edu.mu.servlet.CreateListingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateListingServlet</servlet-name>
+    <url-pattern>/CreateListingServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
