@@ -3,11 +3,13 @@ package edu.mu.servlet;
 import java.io.IOException;
 
 import edu.mu.dao.SignInDao;
+import edu.mu.model.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignInServlet
@@ -18,13 +20,19 @@ public class SignInServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		SignInDao Authenticate = new SignInDao(request.getParameter("email"), request.getParameter("password"));
-		if(Authenticate.Authenticate()) {
-			RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+		User user = Authenticate.Authenticate();
+	
+		if (user != null) {
+	        // User is found and password is correct
+	        HttpSession session = request.getSession();
+	        session.setAttribute("user", user);  // Store user object in session
+	        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
-		}else {
-			RequestDispatcher rd = request.getRequestDispatcher("signIn.jsp");
-			rd.forward(request, response);
-		}
+	    } else {
+	        // Authentication failed
+	        request.setAttribute("error", "Invalid username or password");
+	        request.getRequestDispatcher("login.jsp").forward(request, response);
+	    }
 	}
 
 }

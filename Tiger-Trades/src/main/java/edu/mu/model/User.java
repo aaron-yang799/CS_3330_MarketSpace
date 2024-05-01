@@ -3,8 +3,8 @@ package edu.mu.model;
 import java.util.ArrayList;
 
 public class User {
+	private Integer userid;
 	private String username;
-	private String hashKey;
 	private String email;
 	private ArrayList<Listing> ListingList;
 	private float wallet;
@@ -13,9 +13,9 @@ public class User {
 	private ArrayList<Order> OrderList;
 	private ArrayList<Listing> WatchList;
 	
-	public User(String username, String hashKey, String email,float wallet, String address) {
+	public User(Integer userid, String username, String email, float wallet, String address) {
+		this.userid = userid;
 		this.username = username;
-		this.hashKey = hashKey;
 		this.email = email;
 		this.ListingList = new ArrayList<Listing>();
 		this.wallet = wallet;
@@ -25,20 +25,20 @@ public class User {
 		this.WatchList = new ArrayList<Listing>();
 	}
 
+	public Integer getUserid() {
+		return userid;
+	}
+
+	public void setUserid(Integer userid) {
+		this.userid = userid;
+	}
+
 	public String getUsername() {
 		return username;
 	}
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getHashKey() {
-		return hashKey;
-	}
-
-	public void setHashKey(String hashKey) {
-		this.hashKey = hashKey;
 	}
 
 	public String getEmail() {
