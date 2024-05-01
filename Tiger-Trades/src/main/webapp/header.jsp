@@ -10,6 +10,10 @@
     	background-color: #000;
        	color: #FFD700; /* Mustard yellow */
        padding: 10px;
+       position: fixed;
+       width: 100%;
+       top: 0;
+       left: 0;
 	}
 	.title-container, .link-container {
 		display: flex;
@@ -34,6 +38,7 @@
 	
 	.header-row {
 		background-color: black;
+		
 	}
 	 
  </style>

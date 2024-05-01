@@ -3,7 +3,6 @@
   <display-name>Tiger-Trades</display-name>
   <welcome-file-list>
     <welcome-file>signIn.jsp</welcome-file>
-    
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -24,5 +23,15 @@
   <servlet-mapping>
     <servlet-name>SignUpServlet</servlet-name>
     <url-pattern>/SignUpServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>createListingServelt</display-name>
+    <servlet-name>createListingServelt</servlet-name>
+    <servlet-class>edu.mu.servlet.createListingServelt</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>createListingServelt</servlet-name>
+    <url-pattern>/createListingServelt</url-pattern>
   </servlet-mapping>
 </web-app>
