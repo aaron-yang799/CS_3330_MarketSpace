@@ -26,6 +26,9 @@ public class SignInServlet extends HttpServlet {
 	        // User is found and password is correct
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user", user);  // Store user object in session
+	        
+	        //session.setAttribute("userName", user.getUsername()); 
+
 	        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 	    } else {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="edu.mu.model.User" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,24 @@
                     </div>
                     <div class="col-6 link-container text-right">
                         <a href="#">Listings</a>
-                        <a href="#">User</a>
+                        
+                        
+                        <% 
+						    Object userObj = session.getAttribute("user");
+						    
+						    User user = (User) userObj; // Cast it to the User class, under the assumption there's a User class
+						    if (user.getUsername() != null) 				 // Make sure to use the correct method to get username
+						    {
+						            out.println("Hey, " + user.getUsername() + "!");
+						    }
+						   else {
+						        %>
+						            <a href="signIn.jsp">Login</a> | <a href="signUp.jsp">Register</a>
+						        <%
+						    }
+						%>
+                        
+                        <!-- <a href="#">User</a> -->
                     </div>
                 </div>
             </div>
