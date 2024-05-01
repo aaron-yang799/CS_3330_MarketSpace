@@ -19,9 +19,7 @@ public class SignInDao {
 	
 	public boolean Authenticate() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://auctiondb.cnge86iqy455.us-east-2.rds.amazonaws.com:3306/Auction_DB", "admin", "auctionDB");
-			PreparedStatement ps = con.prepareStatement("SELECT HashedPass FROM Auction_User WHERE Email = ?");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT HashedPass FROM Auction_User WHERE Email = ?");
 			ps.setString(1, this.email);
 			ResultSet rs = ps.executeQuery();
 		
@@ -29,17 +27,12 @@ public class SignInDao {
 				String HashedPass = rs.getString("HashedPass");
 				if(BCrypt.checkpw(this.password, HashedPass)) {
 					ps.close();
-					con.close();
 					return true;
 				}
 			}else {
 				ps.close();
-				con.close();
 				return false;
 			}
-			
-		} catch(ClassNotFoundException e){
-			e.printStackTrace();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}

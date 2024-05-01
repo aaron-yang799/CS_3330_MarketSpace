@@ -21,10 +21,7 @@ public class SignUpDao {
 
 	public void SignUp() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://auctiondb.cnge86iqy455.us-east-2.rds.amazonaws.com:3306/Auction_DB", "admin", "auctionDB");
-
-			PreparedStatement ps = con.prepareStatement("INSERT INTO Auction_User (Username, HashedPass, Email, Wallet) VALUES (?, ?, ?, ?)");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("INSERT INTO Auction_User (Username, HashedPass, Email, Wallet) VALUES (?, ?, ?, ?)");
 			ps.setString(1, this.name);
 			ps.setString(2, BCrypt.hashpw(this.password, BCrypt.gensalt(12)));
 			ps.setString(3, this.email);
@@ -36,10 +33,7 @@ public class SignUpDao {
 			}
 			
 			ps.close();
-			con.close();
 			
-		} catch(ClassNotFoundException e){
-			e.printStackTrace();
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
