@@ -40,7 +40,7 @@
             	    <a id="cancel" class="btn rounded-pill btn-danger d-inline float-right" href="index.jsp">Cancel</a>
             		<h2>New Listing</h2>
             	</div>	
-			    <form action="createListingServlet" method="post">
+			    <form action="CreateListingServlet" method="post">
 	                <div class='mb-3'>
 	                    <label for="title"><strong>Title</strong></label>
 	                    <input type="text" placeholder='Enter Title' name='email' class='form-control rounded-0'>
