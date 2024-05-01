@@ -26,6 +26,7 @@
 			    </div>
 		    </div>
 	    </div>
+	    <%@ include file="createListingButton.jsp" %>
     </div>
 </body>
 </html>
