@@ -1,6 +1,7 @@
 package edu.mu.servlet;
 
 import edu.mu.dao.CreateListingDao;
+import edu.mu.dao.ListingsDao;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -51,8 +52,7 @@ public class CreateListingServlet extends HttpServlet {
 	            return;
 	        }
 		    
-		    CreateListingDao createListing = new CreateListingDao(title, description, buyOut, timeEnd);
-		    createListing.CreateListing();
+		    ListingsDao.CreateListing(title, description, buyOut, timeEnd);
 		    
 		    // TODO CREATE A LISTING CREATED POPUP
 		    RequestDispatcher rd = request.getRequestDispatcher("listingCreated.jsp");

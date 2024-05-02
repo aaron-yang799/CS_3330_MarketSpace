@@ -4,20 +4,21 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Listing {
+	private int listing_id;
 	private String title;
 	private Date timePosted;
 	private Date timeEnd;
-	private ArrayList<String> description;
+	private String description;
 	private float minimumBid;
 	private float buyOutPrice;
 	private ArrayList<Bid> bidList;
 	private ArrayList<User> watchList;
 	
-	public Listing(String title, Date timePosted, Date timeEnd, float minimumBid, float buyOutPrice) {
+	public Listing(String title, Date timePosted, Date timeEnd, String description, float minimumBid, float buyOutPrice) {
 		this.title = title;
 		this.timePosted = timePosted;
 		this.timeEnd = timeEnd;
-		this.description = new ArrayList<String>();
+		this.description = description;
 		this.minimumBid = minimumBid;
 		this.buyOutPrice = buyOutPrice;
 		this.bidList = new ArrayList<Bid>();
@@ -59,11 +60,11 @@ public class Listing {
 		this.timeEnd = timeEnd;
 	}
 
-	public ArrayList<String> getDescription() {
+	public String getDescription() {
 		return description;
 	}
 
-	public void setDescription(ArrayList<String> description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 
@@ -110,5 +111,12 @@ public class Listing {
 		return highestBid;
 	}
 	
+	public int getListing_id() {
+		return listing_id;
+	}
+
+	public void setListing_id(int listing_id) {
+		this.listing_id = listing_id;
+	}
 	
 }

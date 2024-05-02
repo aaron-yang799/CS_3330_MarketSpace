@@ -17,27 +17,33 @@
             background-position: center center;
             height: 100vh; /* Set the height to cover the entire viewport */
         }
+        
+        #listing-container{
+        	display: flex;
+        	margin-top: 60px;
+        	justify-content: center; 
+        }
+        
+        #center-div{
+        	width: 700px;
+        }
     </style>
 </head>
 <body>
 	<div class="background-image">
 		<%@ include file="header.jsp" %>
-	    <div class="container-fluid">
-		    <div class="row">
-			    <div class="col-lg-6 offset-lg-3 text-center">
-				    <div>
-            			<c:if  test="${not empty sessionScope.otherListings}">
-	            			<c:forEach var="sessionScope.otherListings" items="${listing}">
-	                			<a href="#" class="d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none">
-	                    			<span class="h5">${listing.title}</span>
-	                    			<fmt:formatNumber value="$(listing.price)" type="currency" />
-	                			</a>
-	            			</c:forEach>
-	            		</c:if>
-        			</div>
-			    </div>
-		    </div>
-	    </div>
+	    <div id=listing-container>
+	    	<div id="center-div">
+	        	<c:if  test="${not empty sessionScope.otherListingsPrev}">
+		        	<c:forEach var="listing" items="${sessionScope.otherListingsPrev}">
+		            	<a href="#" class="d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150">
+		                	<span class="h5">${listing.title}</span>
+		                    <fmt:formatNumber value="${listing.highest_bid}" type="currency" />
+		                </a>
+		            </c:forEach>
+		         </c:if>
+			</div>
+        </div>
 	    <%@ include file="createListingButton.jsp" %>
     </div>
 </body>

@@ -1,8 +1,11 @@
 package edu.mu.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import edu.mu.dao.ListingsDao;
 import edu.mu.dao.SignInDao;
+import edu.mu.model.ListingPreview;
 import edu.mu.model.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -32,6 +35,13 @@ public class SignInServlet extends HttpServlet {
 	        HttpSession session = request.getSession();
 	        session.setAttribute("user", user);  // Store user object in session
 	        
+	        ArrayList<ListingPreview> list = ListingsDao.getOtherListingsPrev(user);
+	        for(ListingPreview name: list) {
+	        	System.out.println(name.getTitle());
+	        }
+	        session.setAttribute("otherListingsPrev", list);
+	        
+	        System.out.println(session.getAttribute("otherListingsPrev"));
 	        //session.setAttribute("userName", user.getUsername()); 
 
 	        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
