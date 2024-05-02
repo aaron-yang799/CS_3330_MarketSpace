@@ -26,7 +26,7 @@ public class SignUpServlet extends HttpServlet {
         boolean emailChecker = emailCheck(email);
         boolean passChecker = passwordCheck(password);
         
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
+       if(name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
             // Set an attribute indicating error
             request.setAttribute("emptyFieldsError", "All fields must be filled out.");
 
@@ -35,13 +35,22 @@ public class SignUpServlet extends HttpServlet {
             rd.forward(request, response);
             return;
         }else if (!(emailChecker && passChecker)) {
+    		String passwordError = "Password must contain: 8 characters, 1 digit, 1 uppercase letter, 1 lowercase letter, and 1 special character";
+    		String emailError = "Email does not match domain requirements.";
+
         	if(!emailChecker) {
-        		String emailError = "Email does not match domain requirements.";
         		request.setAttribute("emailError", emailError);
+        		if(!passChecker) {
+        			request.setAttribute("passwordError", passwordError);
+        		}
+            	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         	}
         	if(!passChecker) {
-        		String passwordError = "Password must contain: 8 characters, 1 digit, 1 uppercase letter, 1 lowercase letter, and 1 special character";
         		request.setAttribute("passwordError", passwordError);
+        		if(!emailChecker) {
+            		request.setAttribute("emailError", emailError);       			
+        		}
+            	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         	}
         	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
