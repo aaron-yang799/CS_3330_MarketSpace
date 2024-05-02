@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="col-6 link-container text-right">
-                        <a href="#">Listings</a>
+                        <a href="index.jsp">Listings</a>
                         <% 
                             Object userObj = session.getAttribute("user");
                             User user = (User) userObj; // Cast it to the User class
