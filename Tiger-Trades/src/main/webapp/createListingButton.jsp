@@ -11,6 +11,12 @@
 		left: 30px;
 		bottom: 40px;
 		background-color: #FFD700;
+		font-weight: 550;
+	}
+	
+	#create-new-listing:hover{
+		background-color: #28a745
+		;
 	}
  
 </style>

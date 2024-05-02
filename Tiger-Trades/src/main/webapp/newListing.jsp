@@ -17,24 +17,28 @@
 		background-position: center center;
 		background-attachment: fixed;
 		width: 100%;
-		height: 100vh; /* Set the height to cover the entire viewport */
+		height: 75%; /* Set the height to cover the entire viewport */
 	}
 	
-	html{
-		overflow: hidden;
+	#shrink{
+		-webkit-transform:scale(0.9);
+		-moz-transform:scale(0.9);
+		-ms-transform:scale(0.9);
+		transform:scale(0.9);
+		margin-top: 25px;
 	}
 	
 	.popup {
 		width: 40%;		
 		border-radius: 15px;
 	}
-
+	
 </style>
 </head>
 <body>
 	<div>
-		<%@ include file="header.jsp" %>
-	    <div class="d-flex justify-content-center align-items-center vh-100 dopeassbg">
+	<%@ include file="header.jsp" %>
+	    <div id="shrink" class="d-flex justify-content-center align-items-center vh-100 dopeassbg">
 			<div class='bg-white p-3 popup'>
             	<div>
             	    <a id="cancel" class="btn rounded-pill btn-danger d-inline float-right" href="index.jsp">Cancel</a>
@@ -69,9 +73,13 @@
 	                });
 
 					</script>
+					<div class="mb-3">
+						<label for="minBid"><strong>Minimum Bid (USD)</strong></label>
+						<input type="text" id="autoDecimal" name="minBid" maxlength="20" class="form-control" placeholder="Enter Minimum Bid">
+					</div>
 	                <div class='mb-3'>
-						<label for="buyOut"><strong>Buyout Price (USD)</strong></label>
-	                	<input type="text" id="autoDecimal" name="buyOut" maxlength="10" class="form-control" placeholder="Enter Buyout Price">
+						<label for="buyOut"><strong>Buy-Out Price (USD)</strong></label>
+	                	<input type="text" id="autoDecimal" name="buyOut" maxlength="20" class="form-control" placeholder="Enter Buyout Price">
 	                </div>
 	                <div class='mb-3'>
 						<label for="dateEnd"><strong>Listing End Date</strong></label>
