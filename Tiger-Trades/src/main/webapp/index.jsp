@@ -51,9 +51,12 @@
 		<%@ include file="header.jsp" %>
 	    <div id=listing-container>
 	    	<div id="center-div">
+	    	    <c:if test="${not empty listingCreated}">
+        			<c:import url="listingCreated.jsp"/>
+    			</c:if>
 	        	<c:if  test="${not empty sessionScope.otherListingsPrev}">
 		        	<c:forEach var="listing" items="${sessionScope.otherListingsPrev}">
-		            	<form action="ToListingServlet" method="post">
+		            	<form action="ViewListingServlet" method="post">
 		            		<input type="hidden" name="listingId" value="${listing.listing_id}" />
 		                	<button type="submit" class="listing-button d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150 w-100">
 			                	<div class="information-container">

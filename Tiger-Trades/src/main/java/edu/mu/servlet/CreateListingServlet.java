@@ -64,7 +64,8 @@ public class CreateListingServlet extends HttpServlet {
 	
 		    
 		    // TODO CREATE A LISTING CREATED POPUP
-		    RequestDispatcher rd = request.getRequestDispatcher("listingCreated.jsp");
+			request.setAttribute("listingCreated", "Created!");
+		    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		} catch (NumberFormatException e) {
 		    // Handle the case where float parsing fails
