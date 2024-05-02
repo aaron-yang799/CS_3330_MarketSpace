@@ -22,6 +22,11 @@ public class SignInServlet extends HttpServlet {
 		SignInDao Authenticate = new SignInDao(request.getParameter("email"), request.getParameter("password"));
 		User user = Authenticate.Authenticate();
 	
+		if(user == null) {
+			request.setAttribute("error", "Email does not exist or Password is incorrect");
+			request.getRequestDispatcher("signIn.jsp").forward(request, response);
+		}
+		
 		if (user != null) {
 	        // User is found and password is correct
 	        HttpSession session = request.getSession();
@@ -33,8 +38,8 @@ public class SignInServlet extends HttpServlet {
 			rd.forward(request, response);
 	    } else {
 	        // Authentication failed
-	        request.setAttribute("error", "Invalid username or password");
-	        request.getRequestDispatcher("signIn.jsp").forward(request, response);
+	    	request.setAttribute("error", "Email or Password is incorrect");
+			request.getRequestDispatcher("signIn.jsp").forward(request, response);
 	    }
 	}
 

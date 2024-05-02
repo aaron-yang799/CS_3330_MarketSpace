@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,6 +28,10 @@
                 <div class='mb-3'>
                     <label for="password"><strong>Password</strong></label>
                     <input type="password" placeholder='Enter Password' name='password' class='form-control rounded-0'/>
+                    <c:if test="${not empty error}">
+	            		<p style="color: red;">❗  <c:out value="${error}"/></p>
+    				</c:if> 
+                    
                 </div>
                 <button type='submit' class='btn btn-success w-100'><strong>Log In</strong></button>
                 <p class='mb-1 mt-1'>You are agreeing to our terms and policies.</p>
