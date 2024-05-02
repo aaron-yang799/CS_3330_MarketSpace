@@ -58,12 +58,12 @@ public class CreateListingServlet extends HttpServlet {
 	        }
 		    
 
-		    ListingsDao.CreateListing(title, description, buyOut, timeEnd);
 
 		    HttpSession session = request.getSession();
 	      	Object obj = session.getAttribute("user");
 			User user = (User) obj;
 		    
+			ListingsDao.CreateListing(title, description, buyOut, timeEnd, user.getUserid());
 	
 		    
 		    // TODO CREATE A LISTING CREATED POPUP
