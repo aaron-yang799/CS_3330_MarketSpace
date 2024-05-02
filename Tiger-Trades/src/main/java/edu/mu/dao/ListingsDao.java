@@ -92,4 +92,30 @@ public class ListingsDao {
 		
 		return listings;
 	}
+	
+	public static Listing getListingByID(int ID) {
+		Listing listing = null;
+		try {
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimePosted, TimeEnd, ListingDescription, Minimum_Bid, Buy_Out FROM Listing WHERE Listing_ID = ?");
+			System.out.println(ID);
+			ps.setInt(1, ID);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				listing = new Listing(null, null, null, null, ID, ID);
+				listing.setListing_id(ID);
+				listing.setTitle(rs.getString("title"));
+				listing.setTimePosted(rs.getDate("TimePosted"));
+				listing.setTimeEnd(rs.getDate("TimeEnd"));
+				listing.setDescription(rs.getString("ListingDescription"));
+				listing.setMinimumBid(rs.getFloat("Minimum_Bid"));
+				listing.setBuyOutPrice(rs.getFloat("Buy_Out"));
+			}
+		}catch(SQLException e) {
+
+			e.printStackTrace();
+		}
+		return listing;
+	}
 }
