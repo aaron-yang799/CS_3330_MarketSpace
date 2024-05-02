@@ -1,18 +1,16 @@
 package edu.mu.model;
 
-import java.sql.Date;
-
 public class ListingPreview {
 	
 	
 	int listing_id;
 	String title;
-	Date timeUntilEnd;
+	long timeUntilEnd;
 	float highest_bid;
 	
 	
 	
-	public ListingPreview(int listing_id, String title, Date timeEnd, float highest_bid) {
+	public ListingPreview(int listing_id, String title, long timeEnd, float highest_bid) {
 		this.listing_id = listing_id;
 		this.title = title;
 		this.timeUntilEnd = timeEnd;
@@ -30,10 +28,10 @@ public class ListingPreview {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getTimeEnd() {
+	public long getTimeEnd() {
 		return timeUntilEnd;
 	}
-	public void setTimeEnd(Date timeEnd) {
+	public void setTimeEnd(long timeEnd) {
 		this.timeUntilEnd = timeEnd;
 	}
 	public float getHighest_bid() {

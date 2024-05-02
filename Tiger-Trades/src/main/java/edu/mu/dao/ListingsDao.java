@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.*;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import edu.mu.model.User;
 import edu.mu.model.Listing;
@@ -71,17 +73,18 @@ public class ListingsDao {
 			    	System.out.println(set.getFloat("Minimum_Bid"));
 			    	int listing_id = set.getInt("Listing_ID");
 					String title = set.getString("Title");
-					Date timeEnd = set.getDate("TimeEnd");
+					LocalDate timeEnd = set.getDate("TimeEnd").toLocalDate();
+					long timeUntilEnd = ChronoUnit.DAYS.between(LocalDate.now(), timeEnd);
 					// getting all bids for the current listing in the result set.
 					PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Amount_Bid FROM Bid WHERE Listing_ID = ? ORDER BY Amount_Bid DESC LIMIT 1");
 					ps2.setInt(1, listing_id);
 					ResultSet set2 = ps2.executeQuery();
 					if(!set2.next()) {
 						System.out.println("ResultSet2 is empty.");
-						listings.add(new ListingPreview(listing_id, title, timeEnd, set.getFloat("Minimum_Bid")));
+						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
 					} else {
 						float highest = set2.getFloat("Amount_Bid");
-						listings.add(new ListingPreview(listing_id, title, timeEnd, highest));
+						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, highest));
 					}
 			    } while (set.next()); // Move to the next row and check if it exists
 			}
