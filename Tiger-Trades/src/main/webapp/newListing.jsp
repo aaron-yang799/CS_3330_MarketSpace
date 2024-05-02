@@ -48,9 +48,34 @@
 	                <div class='mb-3'>
     					<textarea name="description" style="resize: none;" maxlength="500" rows="8" class="form-control rounded"  placeholder="Enter Description Here..."></textarea>
 	                </div>
+	                <script>
+	                document.addEventListener('DOMContentLoaded', function() {
+	                    const inputField = document.getElementById('autoDecimal');
+
+	                    inputField.addEventListener('input', function(e) {
+	                        let input = e.target.value.replace(/[^0-9]/g, ''); // Strip out non-numeric characters
+	                        if (input.length === 0) {
+	                            e.target.value = ''; // If no digits, leave empty
+	                        } else if (input.length === 1) {
+	                            e.target.value = '0.0' + input; // For single digit, prefix with 0.0
+	                        } else if (input.length === 2) {
+	                            e.target.value = '0.' + input; // For two digits, prefix with 0.
+	                        } else {
+	                            let integerPart = input.slice(0, -2);  // Extract all digits except the last two
+	                            let decimalPart = input.slice(-2); // Last two digits
+	                            e.target.value = parseInt(integerPart) + '.' + decimalPart; // Combine with a decimal point, removing any leading zeros
+	                        }
+	                    });
+	                });
+
+					</script>
+	                <div class='mb-3'>
+						<label for="buyOut"><strong>Buyout Price (USD)</strong></label>
+	                	<input type="text" id="autoDecimal" name="buyOut" maxlength="10" class="form-control" placeholder="Enter Buyout Price">
+	                </div>
 	                <div class='mb-3'>
 						<label for="dateEnd"><strong>Listing End Date</strong></label>
-	                	<input type="text" id="datepicker" name="dateEnd" class="form-control" placeholder="Click to Enter Date">
+	                	<input type="text" id="datepicker" name="timeEnd" class="form-control" placeholder="Click to Enter Date">
 	                </div>
 	                <button type='submit' class='btn btn-success w-100'><strong>Create Listing!</strong></button>
 			   	</form>
