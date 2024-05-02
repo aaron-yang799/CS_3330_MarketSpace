@@ -96,7 +96,7 @@
                                 <div class="dropdown-content-item">
                                     <a href="bids.jsp">Bids</a>
                                     <a href="sellerDashboard.jsp">Seller Dashboard</a>
-                                    <a href="logout.jsp">Logout</a>
+                                    <a href="LogOutServlet">Logout</a>
                                 </div>
                             </div>
                         <% } else { %>
