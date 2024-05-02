@@ -27,6 +27,23 @@
         #center-div{
         	width: 700px;
         }
+        
+        .information-container{
+        	display: flex;
+        	justify-content: space-between;
+        }
+        
+        .listing-button:hover{
+        	background-color: grey;
+        }
+        
+        .listing-title {
+        	display: block;
+        }
+        
+        
+        
+        
     </style>
 </head>
 <body>
@@ -36,10 +53,22 @@
 	    	<div id="center-div">
 	        	<c:if  test="${not empty sessionScope.otherListingsPrev}">
 		        	<c:forEach var="listing" items="${sessionScope.otherListingsPrev}">
-		            	<a href="#" class="d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150">
-		                	<span class="h5">${listing.title}</span>
-		                    <fmt:formatNumber value="${listing.highest_bid}" type="currency" />
-		                </a>
+		            	<form action="ToListingServlet" method="post">
+		            		<input type="hidden" name="listingId" value="${listing.listing_id}" />
+		                	<button type="submit" class="listing-button d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150 w-100">
+			                	<div class="information-container">
+				                	<div class="listing-title">
+				                		<span class="h5">${listing.title}</span>
+				                	</div>
+				                	<div class="time-container">
+				                	
+				                	</div>
+				                    <div class="listing-bid">
+				                    	<fmt:formatNumber value="${listing.highest_bid}" type="currency" />
+				                    </div>
+				                </div>
+			                </button>
+		                </form>
 		            </c:forEach>
 		         </c:if>
 			</div>

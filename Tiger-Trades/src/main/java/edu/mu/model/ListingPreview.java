@@ -7,7 +7,7 @@ public class ListingPreview {
 	
 	int listing_id;
 	String title;
-	Date timeEnd;
+	Date timeUntilEnd;
 	float highest_bid;
 	
 	
@@ -15,7 +15,7 @@ public class ListingPreview {
 	public ListingPreview(int listing_id, String title, Date timeEnd, float highest_bid) {
 		this.listing_id = listing_id;
 		this.title = title;
-		this.timeEnd = timeEnd;
+		this.timeUntilEnd = timeEnd;
 		this.highest_bid = highest_bid;
 	}
 	public int getListing_id() {
@@ -31,10 +31,10 @@ public class ListingPreview {
 		this.title = title;
 	}
 	public Date getTimeEnd() {
-		return timeEnd;
+		return timeUntilEnd;
 	}
 	public void setTimeEnd(Date timeEnd) {
-		this.timeEnd = timeEnd;
+		this.timeUntilEnd = timeEnd;
 	}
 	public float getHighest_bid() {
 		return highest_bid;
