@@ -26,23 +26,32 @@ public class SignUpServlet extends HttpServlet {
         boolean emailChecker = emailCheck(email);
         boolean passChecker = passwordCheck(password);
         
-        if (name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
+       if(name.isEmpty() || email.isEmpty() || password.isEmpty() || address.isEmpty()) {
             // Set an attribute indicating error
-            request.setAttribute("error", "All fields must be filled out.");
+            request.setAttribute("emptyFieldsError", "All fields must be filled out.");
 
             // Redirect back to the sign-up page with an error message
             RequestDispatcher rd = request.getRequestDispatcher("signUp.jsp");
             rd.forward(request, response);
             return;
         }else if (!(emailChecker && passChecker)) {
-        	ArrayList<String> errorMessage = new ArrayList<String>();
+    		String passwordError = "Password must contain: 8 characters, 1 digit, 1 uppercase letter, 1 lowercase letter, and 1 special character";
+    		String emailError = "Email does not match domain requirements.";
+
         	if(!emailChecker) {
-        		errorMessage.add("Email does not match domain requirements.");
+        		request.setAttribute("emailError", emailError);
+        		if(!passChecker) {
+        			request.setAttribute("passwordError", passwordError);
+        		}
+            	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         	}
         	if(!passChecker) {
-        		errorMessage.add("Password must contain: 8 characters, 1 digit, 1 uppercase letter, 1 lowercase letter, and 1 special character");
+        		request.setAttribute("passwordError", passwordError);
+        		if(!emailChecker) {
+            		request.setAttribute("emailError", emailError);       			
+        		}
+            	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         	}
-        	request.setAttribute("error", errorMessage);
         	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
 		
