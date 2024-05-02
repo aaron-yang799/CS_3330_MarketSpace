@@ -1,21 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html public>
 <html>
 <head>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html ; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	.dopeassbg {
-		background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
+.dopeassbg {
+background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
         background-size: cover;
         background-position: center center;
-	}
+}
 </style>
 </head>
 <body>
-	<div class='d-flex justify-content-center align-items-center vh-100 dopeassbg'>
+<div class='d-flex justify-content-center align-items-center vh-100 dopeassbg'>
         <div class='bg-white p-3 rounded w-25'>
             <h2>Sign-Up</h2>
             <form action="SignUpServlet" method="post">
@@ -37,9 +39,14 @@
                 </div>
                 <button type='submit' class='btn btn-success w-100'><strong>Create Account</strong></button>
                 <p class='mb-1 mt-1'>You are agreeing to our terms and policies.</p>
-                <span>Already a member?		<a href='signIn.jsp'>Sign In</a></span>
+                <span>Already a member?<a href='signIn.jsp'>Sign In</a></span>
+                
             </form>
-        </div>
+			<c:if test="${not empty error}">
+        		<c:forEach var="error" items="${error}">
+            		<p style="color: red;">${error}</p>
+        		</c:forEach>
+    		</c:if>        </div>
     </div>
 </body>
 </html>
