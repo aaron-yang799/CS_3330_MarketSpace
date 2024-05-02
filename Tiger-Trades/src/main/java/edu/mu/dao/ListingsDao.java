@@ -10,14 +10,15 @@ import edu.mu.model.Listing;
 import edu.mu.model.ListingPreview;
 
 public class ListingsDao {
-	public static void CreateListing(String title, String description, float buyOut, Date timeEnd, int user_id) {
+	public static void CreateListing(String title, String description, float buyOut, Date timeEnd, int user_id, float minBid) {
 		try {
-			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("INSERT INTO Listing (Title, TimeEnd, Listing_Description, Buy_Out, User_ID) VALUES (?, ?, ?, ?, ?)");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("INSERT INTO Listing (Title, TimeEnd, Listing_Description, Buy_Out, User_ID, Minimum_Bid) VALUES (?, ?, ?, ?, ?, ?)");
 			ps.setString(1, title);
 			ps.setDate(2, timeEnd);
 			ps.setString(3, description);
 			ps.setFloat(4, buyOut);
 			ps.setInt(5, user_id);
+			ps.setFloat(6, minBid);
 			
 			int rowsInserted = ps.executeUpdate();
 			if (rowsInserted > 0) {

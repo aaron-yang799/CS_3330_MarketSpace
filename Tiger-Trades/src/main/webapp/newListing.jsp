@@ -71,11 +71,11 @@
 	                        }
 	                    });
 	                });
-
+	                
 					</script>
 					<div class="mb-3">
 						<label for="minBid"><strong>Minimum Bid (USD)</strong></label>
-						<input type="text" id="autoDecimal" name="minBid" maxlength="20" class="form-control" placeholder="Enter Minimum Bid">
+						<input type="text" name="minBid" maxlength="20" class="form-control" placeholder="Enter Minimum Bid">
 					</div>
 	                <div class='mb-3'>
 						<label for="buyOut"><strong>Buy-Out Price (USD)</strong></label>

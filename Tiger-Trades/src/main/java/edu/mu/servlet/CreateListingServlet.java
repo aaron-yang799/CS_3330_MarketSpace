@@ -1,23 +1,18 @@
 package edu.mu.servlet;
 
 
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import edu.mu.dao.ListingsDao;
-
 import edu.mu.model.User;
-
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
 /**
  * Servlet implementation class CreateListingServlet
  */
@@ -29,6 +24,7 @@ public class CreateListingServlet extends HttpServlet {
 		    String title = request.getParameter("title");
 		    String description = request.getParameter("description");
 		    float buyOut = Float.parseFloat(request.getParameter("buyOut"));
+		    float minBid = Float.parseFloat(request.getParameter("minBid"));
 		    
 		    // String request to test for empty
 		    String buyOutString = request.getParameter("buyOut");
@@ -63,7 +59,7 @@ public class CreateListingServlet extends HttpServlet {
 	      	Object obj = session.getAttribute("user");
 			User user = (User) obj;
 		    
-			ListingsDao.CreateListing(title, description, buyOut, timeEnd, user.getUserid());
+			ListingsDao.CreateListing(title, description, buyOut, timeEnd, user.getUserid(), minBid);
 	
 		    
 		    // TODO CREATE A LISTING CREATED POPUP
