@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import edu.mu.dao.SignUpDao;
+import edu.mu.model.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class SignUpServlet
@@ -54,6 +56,8 @@ public class SignUpServlet extends HttpServlet {
         	}
         	request.getRequestDispatcher("signUp.jsp").forward(request, response);
         }
+       
+       	
 		
 		SignUpDao SignUp = new SignUpDao(request.getParameter("name"), request.getParameter("email"), request.getParameter("password"), request.getParameter("address"));
 		SignUp.SignUp();
