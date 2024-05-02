@@ -24,7 +24,8 @@ public class CreateListingServlet extends HttpServlet {
 		    String title = request.getParameter("title");
 		    String description = request.getParameter("description");
 		    float buyOut = Float.parseFloat(request.getParameter("buyOut"));
-		    float minBid = Float.parseFloat(request.getParameter("minBid"));
+		    float minBid = (float) Integer.parseInt(request.getParameter("minBid"));
+		    
 		    
 		    // String request to test for empty
 		    String buyOutString = request.getParameter("buyOut");
