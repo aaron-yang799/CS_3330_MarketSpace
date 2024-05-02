@@ -1,12 +1,17 @@
 package edu.mu.servlet;
 
-import edu.mu.dao.CreateListingDao;
+
 import edu.mu.dao.ListingsDao;
+
+import edu.mu.model.User;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -52,7 +57,14 @@ public class CreateListingServlet extends HttpServlet {
 	            return;
 	        }
 		    
+
 		    ListingsDao.CreateListing(title, description, buyOut, timeEnd);
+
+		    HttpSession session = request.getSession();
+	      	Object obj = session.getAttribute("user");
+			User user = (User) obj;
+		    
+	
 		    
 		    // TODO CREATE A LISTING CREATED POPUP
 		    RequestDispatcher rd = request.getRequestDispatcher("listingCreated.jsp");

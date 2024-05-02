@@ -5,46 +5,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
- <style>
- 	.custom-header {
-    	background-color: #000;
-       	color: #FFD700; /* Mustard yellow */
-       padding: 10px;
-       position: fixed;
-       width: 100%;
-       top: 0;
-       left: 0;
-       z-index: 1000;
-	}
-	.title-container, .link-container {
-		display: flex;
-		align-items: center;
-	}
-	.title {
-		font-size: 24px; /* Medium size */
-		margin: 0;
-		font-family: 'Graphik';
-	}
-	.title {
-		color: #FFD700;
-	}
-	.link-container {
-		display: flex;
-		justify-content: space-evenly;        	
-	}
-	.link-container a {
-		color: #FFD700; /* Mustard yellow */
-		text-decoration: none; /* Remove default underline */
-		margin-left: 20px; /* Add some spacing between links */
-	}
-	
-	.header-row {
-		background-color: black;
-		
-	}
-	 
- </style>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+    .custom-header {
+        background-color: #000;
+        color: #FFD700; /* Mustard yellow */
+        padding: 10px;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+    .title-container, .link-container {
+        display: flex;
+        align-items: center;
+    }
+    .title {
+        font-size: 24px; /* Medium size */
+        margin: 0;
+        font-family: 'Graphik';
+        color: #FFD700;
+    }
+    .link-container {
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .link-container a {
+        color: #FFD700; /* Mustard yellow */
+        text-decoration: none; /* Remove default underline */
+        margin-left: 0px; /* Add some spacing between links */
+    }
+    .header-row {
+        background-color: black;
+    }
+    /* Dropdown CSS */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+        text-align: left;
+    }
+    .dropdown-content-item {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 140px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 10;
+        text-align: left; /* Aligns text to the left */
+    	white-space: nowrap;
+    	
+    }
+    .dropdown-content-item a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+    button {
+    	color: #FFD700;
+    	background-color: black;
+    	padding: 0;
+    	border: none;
+    }
+    .dropdown-content-item a:hover {background-color: #f1f1f1}
+    .dropdown:hover .dropdown-content-item {display: block;}
+    .dropbtn:hover {background-color: #3e8e41;}
+</style>
 </head>
 <body>
 <div class="container-fluid header-shell">
@@ -59,28 +86,22 @@
                     </div>
                     <div class="col-6 link-container text-right">
                         <a href="#">Listings</a>
-                        
-                        
                         <% 
-						    Object userObj = session.getAttribute("user");
-						    
-						    User user = (User) userObj; // Cast it to the User class, under the assumption there's a User class
-						    if (user.getUsername() != null) 				 // Make sure to use the correct method to get username
-						    {
-							%>
-						    
-						    	<a href="index.jsp"><%=("Hey, " + user.getUsername() + "!").toString()%></a>
-						    <%
-						    }
-						   else 
-						   {
-						   %>
-						   		<a href="signIn.jsp">Login</a> | <a href="signUp.jsp">Register</a>
-						   <%
-						   }
-						%>
-                        
-                        <!-- <a href="#">User</a> -->
+                            Object userObj = session.getAttribute("user");
+                            User user = (User) userObj; // Cast it to the User class
+                            if (user != null && user.getUsername() != null) {
+                        %>
+                            <div class="dropdown">
+                                <button> Hey, <%= user.getUsername() %>!</button>
+                                <div class="dropdown-content-item">
+                                    <a href="bids.jsp">Bids</a>
+                                    <a href="sellerDashboard.jsp">Seller Dashboard</a>
+                                    <a href="logout.jsp">Logout</a>
+                                </div>
+                            </div>
+                        <% } else { %>
+                            <a href="signIn.jsp">Login</a> | <a href="signUp.jsp">Register</a>
+                        <% } %>
                     </div>
                 </div>
             </div>
