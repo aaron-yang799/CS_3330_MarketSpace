@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 /**
  * Servlet implementation class CreateListingServlet
  */
@@ -23,12 +26,22 @@ public class CreateListingServlet extends HttpServlet {
 		    
 		    // String request to test for empty
 		    String buyOutString = request.getParameter("buyOut");
-		    String timeEndString = request.getParameter("timeEnd");
-		    
+		    String timeEndString = request.getParameter("timeEnd").replace("/", "-");
+		    		
+		    DateTimeFormatter format0 = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+		    LocalDate tempDate = LocalDate.parse(timeEndString, format0);
+	        DateTimeFormatter format1 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        String formattedDate = tempDate.format(format1);
+
+
 		    // Date parsing to process date into database
-		    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Adjust date format as needed
-		    java.util.Date parsedDate = dateFormat.parse(request.getParameter("timeEnd"));
-		    java.sql.Date timeEnd = new java.sql.Date(parsedDate.getTime());
+	        DateTimeFormatter format2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        LocalDate localDate =  LocalDate.parse(formattedDate, format2);
+	        java.sql.Date timeEnd = java.sql.Date.valueOf(localDate);
+		    
+            
+		    System.out.println(timeEnd);
+
 		    
 		    if (title.isEmpty() || description.isEmpty() || buyOutString.isEmpty() || timeEndString.isEmpty()) {
 	            request.setAttribute("error", "All fields must be filled out.");
@@ -47,9 +60,7 @@ public class CreateListingServlet extends HttpServlet {
 		} catch (NumberFormatException e) {
 		    // Handle the case where float parsing fails
 		    e.printStackTrace();
-		} catch (ParseException e) {
-		    // Handle the case where date parsing fails
-		    e.printStackTrace();
 		}        		
 	}
+
 }

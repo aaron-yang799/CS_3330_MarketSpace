@@ -1,6 +1,5 @@
 package edu.mu.dao;
 import java.sql.*;
-import java.sql.Date;
 
 public class CreateListingDao {
 	private String title;

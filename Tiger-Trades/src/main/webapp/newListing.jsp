@@ -43,7 +43,7 @@
 			    <form action="CreateListingServlet" method="post">
 	                <div class='mb-3'>
 	                    <label for="title"><strong>Title</strong></label>
-	                    <input type="text" placeholder='Enter Title' name='email' class='form-control rounded-0'>
+	                    <input type="text" placeholder='Enter Title' name='title' class='form-control rounded-0'>
 	                </div>
 	                <div class='mb-3'>
     					<textarea name="description" style="resize: none;" maxlength="500" rows="8" class="form-control rounded"  placeholder="Enter Description Here..."></textarea>
