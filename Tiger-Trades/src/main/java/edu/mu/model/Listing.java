@@ -1,18 +1,19 @@
 package edu.mu.model;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Listing {
 	private String title;
-	private LocalDate timePosted;
-	private LocalDate timeEnd;
+	private Date timePosted;
+	private Date timeEnd;
 	private ArrayList<String> description;
 	private float minimumBid;
 	private float buyOutPrice;
 	private ArrayList<Bid> bidList;
 	private ArrayList<User> watchList;
 	
-	public Listing(String title, LocalDate timePosted, LocalDate timeEnd, float minimumBid, float buyOutPrice) {
+	public Listing(String title, Date timePosted, Date timeEnd, float minimumBid, float buyOutPrice) {
 		this.title = title;
 		this.timePosted = timePosted;
 		this.timeEnd = timeEnd;
@@ -42,19 +43,19 @@ public class Listing {
 		this.title = title;
 	}
 
-	public LocalDate getTimePosted() {
+	public Date getTimePosted() {
 		return timePosted;
 	}
 
-	public void setTimePosted(LocalDate timePosted) {
+	public void setTimePosted(Date timePosted) {
 		this.timePosted = timePosted;
 	}
 
-	public LocalDate getTimeEnd() {
+	public Date getTimeEnd() {
 		return timeEnd;
 	}
 
-	public void setTimeEnd(LocalDate timeEnd) {
+	public void setTimeEnd(Date timeEnd) {
 		this.timeEnd = timeEnd;
 	}
 

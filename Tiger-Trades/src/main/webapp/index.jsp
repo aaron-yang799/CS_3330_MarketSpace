@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +25,16 @@
 	    <div class="container-fluid">
 		    <div class="row">
 			    <div class="col-lg-6 offset-lg-3 text-center">
-				    
+				    <div>
+            			<c:if  test="${not empty sessionScope.otherListings}">
+	            			<c:forEach var="sessionScope.otherListings" items="${listing}">
+	                			<a href="#" class="d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none">
+	                    			<span class="h5">${listing.title}</span>
+	                    			<fmt:formatNumber value="$(listing.price)" type="currency" />
+	                			</a>
+	            			</c:forEach>
+	            		</c:if>
+        			</div>
 			    </div>
 		    </div>
 	    </div>
