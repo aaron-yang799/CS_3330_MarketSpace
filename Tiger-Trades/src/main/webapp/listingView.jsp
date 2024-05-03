@@ -14,7 +14,7 @@
 		    background-image: url('images/011922JesseHall1.png');
 		    background-size: cover;
 		    background-position: center center;
-		    min-height: 100vh; /* Ensure it covers at least the full height but can extend with content */
+		    min-height: 100vh;
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
@@ -48,10 +48,12 @@
         <%@ include file="header.jsp" %>
         <div class='d-flex justify-content-center align-items-center'>
             <div class='container-details'>
-			    <h2>${sessionScope.listing.title}</h2>
+            	<div>
+            	    <a id="close" class="btn rounded-pill btn-danger d-inline float-right" href="index.jsp">Close</a>
+            		<h2>${sessionScope.listing.title}</h2>
+            	</div>
 			    <div class="row">
 			        <div class="col">
-			            <!-- Left column content -->
 			            <p><strong>Description:</strong> ${sessionScope.listing.description}</p>
 			            <p><strong>Posted:</strong> <fmt:formatDate value="${sessionScope.listing.timePosted}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Ends:</strong> <fmt:formatDate value="${sessionScope.listing.timeEnd}" pattern="MMMM-dd-yyyy"/></p>
@@ -59,7 +61,6 @@
 			            <p><strong>Buyout Price:</strong> $<fmt:formatNumber value="${sessionScope.listing.buyOutPrice}"/></p>
 			        </div>
 			        <div class="col">
-			            <!-- Right column content -->
 			            
 			        </div>
 			    </div>
