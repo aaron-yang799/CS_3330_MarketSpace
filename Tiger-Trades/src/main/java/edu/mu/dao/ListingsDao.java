@@ -11,6 +11,9 @@ import edu.mu.model.User;
 import edu.mu.model.Listing;
 import edu.mu.model.ListingPreview;
 
+// TODO clear out-dated listings from the database!
+
+
 public class ListingsDao {
 	public static void CreateListing(String title, String description, float buyOut, Date timeEnd, int user_id, float minBid) {
 		try {
@@ -30,7 +33,7 @@ public class ListingsDao {
 			ps.close();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+
 			e.printStackTrace();
 		}
 	}
