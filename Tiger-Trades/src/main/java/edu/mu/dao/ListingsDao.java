@@ -96,6 +96,48 @@ public class ListingsDao {
 		return listings;
 	}
 	
+	public static ArrayList<ListingPreview> getUserListings(User user) {
+		ArrayList<ListingPreview> listings = new ArrayList<ListingPreview>();
+		try {
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimeEnd, Minimum_Bid FROM Listing WHERE User_ID = ?");
+			System.out.println(user);
+			ps.setInt(1, user.getUserid());
+			
+			ResultSet set = ps.executeQuery();
+			//execute query to get listing preview information for listings that aren't from the current user.
+			
+			
+			System.out.println(set);
+			if (!set.next()) {
+			    System.out.println("ResultSet is empty.");
+			} else {
+			    do {
+			    	System.out.println(set.getFloat("Minimum_Bid"));
+			    	int listing_id = set.getInt("Listing_ID");
+					String title = set.getString("Title");
+					LocalDate timeEnd = set.getDate("TimeEnd").toLocalDate();
+					long timeUntilEnd = ChronoUnit.DAYS.between(LocalDate.now(), timeEnd);
+					// getting all bids for the current listing in the result set.
+					PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Amount_Bid FROM Bid WHERE Listing_ID = ? ORDER BY Amount_Bid DESC LIMIT 1");
+					ps2.setInt(1, listing_id);
+					ResultSet set2 = ps2.executeQuery();
+					if(!set2.next()) {
+						System.out.println("ResultSet2 is empty.");
+						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
+					} else {
+						float highest = set2.getFloat("Amount_Bid");
+						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, highest));
+					}
+			    } while (set.next()); // Move to the next row and check if it exists
+			}
+		}catch(SQLException e) {
+
+			e.printStackTrace();
+		}
+		
+		return listings;
+	}
+	
 	public static Listing getListingByID(int ID) {
 		Listing listing = null;
 		try {

@@ -14,7 +14,7 @@
 	<style>
         /* Custom CSS for background image */
         .background-image {
-            background-image: url('images/columns_background.jpg'); /* Path to your background image */
+            background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
             background-size: cover;
             background-position: center center;
             height: 100vh; /* Set the height to cover the entire viewport */
@@ -43,15 +43,11 @@
         	display: flex;
         	align-items: center;
         }
-        
+     
         .days-left {
         	color: red;
         }
-        
-        
-        
-        
-        
+
     </style>
 </head>
 <body>

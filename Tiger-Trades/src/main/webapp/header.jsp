@@ -17,7 +17,7 @@
         left: 0;
         z-index: 1000;
     }
-    .title-container, .link-container {
+    .title-container {
         display: flex;
         align-items: center;
     }
@@ -26,10 +26,10 @@
         margin: 0;
         font-family: 'Graphik';
         color: #FFD700;
+        background-color: Black;
     }
     .link-container {
-        display: flex;
-        justify-content: space-evenly;
+        display: flex; 
     }
     .link-container a {
         color: #FFD700; /* Mustard yellow */
@@ -43,7 +43,6 @@
     .dropdown {
         position: relative;
         display: inline-block;
-        text-align: left;
     }
     .dropdown-content-item {
         display: none;
@@ -68,6 +67,19 @@
     	padding: 0;
     	border: none;
     }
+	
+	.indexLink {
+		color: #FFD700;
+	}
+	
+	.indexLink:hover {
+		  filter: brightness(75%);
+		  color: #FFD700;
+		  text-decoration: none; 
+		
+	}
+	
+	
     .dropdown-content-item a:hover {background-color: #f1f1f1}
     .dropdown:hover .dropdown-content-item {display: block;}
     .dropbtn:hover {background-color: #3e8e41;}
@@ -81,17 +93,16 @@
                 <div class="row w-100">
                     <div class="col-6 title-container">
                         <div class="title">
-                            TigerTrades
+                            <a href="index.jsp" id="TigerTradesIcon" class="indexLink">TigerTrades</a>
                         </div>
                     </div>
-                    <div class="col-6 link-container text-right">
-                        <a href="index.jsp">Listings</a>
+                    <div class="col-6 link-container justify-content-end">
                         <% 
                             Object userObj = session.getAttribute("user");
                             User user = (User) userObj; // Cast it to the User class
                             if (user != null && user.getUsername() != null) {
                         %>
-                            <div class="dropdown">
+                            <div class="dropdown float-right">
                                 <button> Hey, <%= user.getUsername() %>!</button>
                                 <div class="dropdown-content-item">
                                     <a href="bids.jsp">Bids</a>
