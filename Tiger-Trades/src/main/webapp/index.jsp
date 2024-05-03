@@ -9,6 +9,8 @@
 <meta charset="UTF-8">
 <title>TigerTrades</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
 	<style>
         /* Custom CSS for background image */
         .background-image {
@@ -53,13 +55,11 @@
     </style>
 </head>
 <body>
+	<%@ include file="listingCreated.jsp" %>
 	<div class="background-image">
 		<%@ include file="header.jsp" %>
 	    <div id=listing-container>
 	    	<div id="center-div">
-	    	    <c:if test="${not empty listingCreated}">
-        			<c:import url="listingCreated.jsp"/>
-    			</c:if>
 	        	<c:if  test="${not empty sessionScope.otherListingsPrev}">
 		        	<c:forEach var="listing" items="${sessionScope.otherListingsPrev}">
 		            	<form action="ViewListingServlet" method="post">
@@ -86,5 +86,15 @@
         </div>
 	    <%@ include file="createListingButton.jsp" %>
     </div>
+    <script>
+    $(document).ready(function() {
+        <c:if test="${not empty listingCreated}">
+            $("#myModal").modal('show');
+        </c:if>
+    });
+	</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
