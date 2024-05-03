@@ -175,7 +175,8 @@ public class ListingsDao {
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				ps.setFloat(1, bid);
+				PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("UPDATE Listing SET Minimum_Bid = ?");
+				ps2.setFloat(1, bid);
 			}
 			
 		} catch (SQLException e) {
