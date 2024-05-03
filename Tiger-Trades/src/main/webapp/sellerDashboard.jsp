@@ -42,6 +42,16 @@
      .days-left {
        	color: red;
      }
+     
+     .listing-button {
+     	background-color: white;
+     	display: block;
+     	color: black;
+     }
+     
+     .listing-button:hover {
+     	background-color: #D3D3D3;
+     }
         
 </style>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
@@ -56,7 +66,7 @@
 		        	<c:forEach var="listing" items="${sessionScope.userListing}">
 		            	<form action="EditListingServlet" method="post">
 		            		<input type="hidden" name="listingId" value="${listing.listing_id}" />
-		                	<button type="submit" class="listing-button d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150 w-100">
+		                	<button type="submit" class="listing-button p-3 my-2 rounded-pill vh-150 w-100">
 			                	<div class="information-container">
 				                	<div class="listing-title">
 				                		<span class="h5">${listing.title}</span>
