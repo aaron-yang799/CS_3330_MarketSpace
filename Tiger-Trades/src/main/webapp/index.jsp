@@ -38,8 +38,14 @@
         }
         
         .listing-title {
-        	display: block;
+        	display: flex;
+        	align-items: center;
         }
+        
+        .days-left {
+        	color: red;
+        }
+        
         
         
         
@@ -63,12 +69,14 @@
 				                	<div class="listing-title">
 				                		<span class="h5">${listing.title}</span>
 				                	</div>
-				                	<div class="time-container">
-				                	
-				                	</div>
-				                    <div class="listing-bid">
-				                    	<fmt:formatNumber value="${listing.highest_bid}" type="currency" />
-				                    </div>
+				                	<div>
+					                    <div class="listing-bid">
+					                    	<span>Highest Bid: <fmt:formatNumber value="${listing.highest_bid}" type="currency" /></span>
+					                    </div>
+					                    <div class="time-container">
+					                		<span class="days-left">${listing.timeUntilEnd} Days Remaining</span>
+					                	</div>
+					                </div>
 				                </div>
 			                </button>
 		                </form>

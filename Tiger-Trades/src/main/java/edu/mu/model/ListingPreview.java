@@ -28,10 +28,10 @@ public class ListingPreview {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public long getTimeEnd() {
+	public long getTimeUntilEnd() {
 		return timeUntilEnd;
 	}
-	public void setTimeEnd(long timeEnd) {
+	public void setTimeUntilEnd(long timeEnd) {
 		this.timeUntilEnd = timeEnd;
 	}
 	public float getHighest_bid() {
