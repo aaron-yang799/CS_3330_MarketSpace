@@ -22,12 +22,13 @@ import edu.mu.model.User;
 public class ViewListingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int listing_id = Integer.parseInt(request.getParameter("listing_id"));
+			int listing_id = Integer.parseInt(request.getParameter("listingId"));
 			Listing listing = ListingsDao.getListingByID(listing_id);
 			
-			request.setAttribute("listing", listing);
+			HttpSession session = request.getSession();
+			session.setAttribute("listing", listing);
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher("listingView.jsp");
 			dispatcher.forward(request, response);
