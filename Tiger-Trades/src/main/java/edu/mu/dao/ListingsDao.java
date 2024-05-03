@@ -143,7 +143,6 @@ public class ListingsDao {
 	}
 	
 	public static Listing getListingByID(int ID) {
-		System.out.println("GETLISTINGBYID IS BEING CALLED");
 		Listing listing = null;
 		try {
 			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimePosted, TimeEnd, Listing_Description, Minimum_Bid, Buy_Out FROM Listing WHERE Listing_ID = ?");
@@ -167,5 +166,21 @@ public class ListingsDao {
 			e.printStackTrace();
 		}
 		return listing;
+	}
+	
+	public static void createBid(int listingID, float bid) {
+		try {
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Minimum_Bid FROM Listing WHERE Listing_ID = ?");
+			ps.setInt(1, listingID);
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				ps.setFloat(1, bid);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
