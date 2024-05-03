@@ -9,11 +9,14 @@
 <meta http-equiv="Content-Type" content="text/html ; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-.dopeassbg {
-background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
-        background-size: cover;
-        background-position: center center;
-}
+	.dopeassbg {
+		background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
+	        background-size: cover;
+	        background-position: center center;
+	}
+	body {
+		overscroll-behavior: none;		
+	}
 </style>
 </head>
 <body>

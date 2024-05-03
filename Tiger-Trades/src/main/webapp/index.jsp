@@ -10,45 +10,45 @@
 <title>TigerTrades</title>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<style>
+	body {
+		overscroll-behavior: none;		
+	background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+	}
+	
+	#listing-container{
+		display: flex;
+		margin-top: 60px;
+		justify-content: center; 
+	}
+	
+	#center-div{
+		width: 700px;
+	}
+	
+	.information-container{
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	.listing-button:hover{
+		background-color: grey;
+	}
+	
+	.listing-title {
+		display: flex;
+		align-items: center;
+	}
+	
+	.days-left {
+		color: red;
+	}
 
-	<style>
-        /* Custom CSS for background image */
-        .background-image {
-            background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
-            background-size: cover;
-            background-position: center center;
-            height: 100vh; /* Set the height to cover the entire viewport */
-        }
-        
-        #listing-container{
-        	display: flex;
-        	margin-top: 60px;
-        	justify-content: center; 
-        }
-        
-        #center-div{
-        	width: 700px;
-        }
-        
-        .information-container{
-        	display: flex;
-        	justify-content: space-between;
-        }
-        
-        .listing-button:hover{
-        	background-color: grey;
-        }
-        
-        .listing-title {
-        	display: flex;
-        	align-items: center;
-        }
-     
-        .days-left {
-        	color: red;
-        }
-
-    </style>
+</style>
 </head>
 <body>
 	<%@ include file="listingCreated.jsp" %>

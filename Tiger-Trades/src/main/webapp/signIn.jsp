@@ -14,6 +14,10 @@
         background-size: cover;
         background-position: center center;
 	}
+	
+	body {
+		overscroll-behavior: none;		
+	}
 </style>
 </head>
 <body>

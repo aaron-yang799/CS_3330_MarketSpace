@@ -10,12 +10,15 @@
 <title>Insert title here</title>
 </head>
 <style>
-	.dopeassbg {
+	body {
+		overscroll-behavior: none;
 		background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
         background-size: cover;
-        background-position: center center;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
 	}
-	
+
 	#listing-container{
        	display: flex;
         margin-top: 60px;
@@ -32,7 +35,12 @@
      }
      
      .listing-title {
-        display: block;
+     	align-items: center;
+        display: flex;
+     }
+     
+     .days-left {
+       	color: red;
      }
         
 </style>
@@ -40,32 +48,35 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
 <body>
-	<%@ include file="header.jsp" %>
-	<div class='d-flex justify-content-center vh-100 dopeassbg'>
-		<div id=listing-container>
+	<div class="dopeassbg">
+		<%@ include file="header.jsp" %>
+	    <div id=listing-container>
 	    	<div id="center-div">
-				<c:forEach var="listing" items="${sessionScope.userListing}">
-					<form action="ViewListingServlet" method="post">
-				    	<input type="hidden" name="listingId" value="${listing.listing_id}" />
-				        <button type="submit" class="listing-button d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150 w-100">
-						    <div class="information-container">
-							 	<div class="listing-title">
-							    	<span class="h5">${listing.title}</span>
-							     </div>
-							     <div class="time-container">
-							     	<div class="time-container">
-                                     	<span class="days-left">${listing.timeUntilEnd} Days Remaining</span>
-                                     </div>           	
-							     </div>
-							     <div class="listing-bid">
-							     	<fmt:formatNumber value="${listing.highest_bid}" type="currency" />
-							     </div>
-							</div>
-						</button>
-					</form>
-				</c:forEach>
+	        	<c:if  test="${not empty sessionScope.userListing}">
+		        	<c:forEach var="listing" items="${sessionScope.userListing}">
+		            	<form action="EditListingServlet" method="post">
+		            		<input type="hidden" name="listingId" value="${listing.listing_id}" />
+		                	<button type="submit" class="listing-button d-block bg-white text-dark p-3 my-2 rounded-pill text-decoration-none vh-150 w-100">
+			                	<div class="information-container">
+				                	<div class="listing-title">
+				                		<span class="h5">${listing.title}</span>
+				                	</div>
+				                	<div>
+					                    <div class="listing-bid">
+					                    	<span>Highest Bid: <fmt:formatNumber value="${listing.highest_bid}" type="currency" /></span>
+					                    </div>
+					                    <div class="time-container">
+					                		<span class="days-left">${listing.timeUntilEnd} Days Remaining</span>
+					                	</div>
+					                </div>
+				                </div>
+			                </button>
+		                </form>
+		            </c:forEach>
+		         </c:if>
 			</div>
-		</div>
-	</div>
+        </div>
+	    <%@ include file="createListingButton.jsp" %>
+    </div>
 </body>
 </html>

@@ -35,7 +35,6 @@
 		<%@ include file="header.jsp" %>
 	    	<div id = "listing-container">
 	    		
-	    	
 	    	</div>
 	    <%@ include file="createListingButton.jsp" %>
     </div>

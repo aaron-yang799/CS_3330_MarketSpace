@@ -18,6 +18,7 @@
 		background-attachment: fixed;
 		width: 100%;
 		height: 75%; /* Set the height to cover the entire viewport */
+		overscroll-behavior: none;		
 	}
 	
 	#shrink{
