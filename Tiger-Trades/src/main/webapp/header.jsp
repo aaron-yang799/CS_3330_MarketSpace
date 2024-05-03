@@ -79,6 +79,9 @@
 		
 	}
 	
+	.loginLink, .signUpLink:hover {
+		text-decoration: none;
+	}
 	
     .dropdown-content-item a:hover {background-color: #f1f1f1}
     .dropdown:hover .dropdown-content-item {display: block;}
@@ -93,7 +96,8 @@
                 <div class="row w-100">
                     <div class="col-6 title-container">
                         <div class="title">
-                            <a href="index.jsp" id="TigerTradesIcon" class="indexLink">TigerTrades</a>
+                            <a href="index.jsp" id="TigerTradesIcon" class="indexLink">TigerTrades&nbsp;</a>
+                            <a href="https://github.com/aaron-yang799/CS_3330_MarketSpace"><img src="images/github-white.png" alt="github" height="32px" width="32px" class="mb-1"></a>
                         </div>
                     </div>
                     <div class="col-6 link-container justify-content-end">
@@ -103,15 +107,15 @@
                             if (user != null && user.getUsername() != null) {
                         %>
                             <div class="dropdown float-right">
-                                <button> Hey, <%= user.getUsername() %>!</button>
+                                <button class="mt-2"> Hey, <%= user.getUsername() %>!</button>
                                 <div class="dropdown-content-item">
                                     <a href="bids.jsp">Bids</a>
-                                    <a href="sellerDashboard.jsp">Seller Dashboard</a>
+                                    <a href="sellerDashBoardServlet">Seller Dashboard</a>
                                     <a href="LogOutServlet">Logout</a>
                                 </div>
                             </div>
                         <% } else { %>
-                            <a href="signIn.jsp">Login</a> | <a href="signUp.jsp">Register</a>
+                            <a href="signIn.jsp">Login</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;<a href="signUp.jsp">Register</a>
                         <% } %>
                     </div>
                 </div>

@@ -17,6 +17,7 @@
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        filter: brightness(90%);
 	}
 
 	#listing-container{
@@ -62,6 +63,7 @@
 		<%@ include file="header.jsp" %>
 	    <div id=listing-container>
 	    	<div id="center-div">
+	    	<br>
 	        	<c:if  test="${not empty sessionScope.userListing}">
 		        	<c:forEach var="listing" items="${sessionScope.userListing}">
 		            	<form action="EditListingServlet" method="post">

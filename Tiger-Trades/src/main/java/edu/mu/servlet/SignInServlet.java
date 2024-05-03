@@ -40,9 +40,7 @@ public class SignInServlet extends HttpServlet {
 	        	System.out.println(name.getTitle());
 	        }
 	        session.setAttribute("otherListingsPrev", list);
-	        
-	        ArrayList<ListingPreview> userListing = ListingsDao.getUserListings(user);
-	        session.setAttribute("userListing", userListing);
+	       
 	        
 	        System.out.println(session.getAttribute("otherListingsPrev"));
 	        //session.setAttribute("userName", user.getUsername()); 

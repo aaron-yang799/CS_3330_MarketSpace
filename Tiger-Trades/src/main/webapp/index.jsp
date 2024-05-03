@@ -13,7 +13,7 @@
 <style>
 	body {
 		overscroll-behavior: none;		
-	background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
+		background-image: url('images/011922JesseHall1.png'); /* Path to your background image */
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -22,7 +22,7 @@
 	
 	#listing-container{
 		display: flex;
-		margin-top: 60px;
+		margin-top: 60px; 
 		justify-content: center; 
 	}
 	
@@ -64,7 +64,8 @@
 		<%@ include file="header.jsp" %>
 	    <div id=listing-container>
 	    	<div id="center-div">
-	        	<c:if  test="${not empty sessionScope.otherListingsPrev}">
+	    	<br>
+	        	<c:if test="${not empty sessionScope.otherListingsPrev}">
 		        	<c:forEach var="listing" items="${sessionScope.otherListingsPrev}">
 		            	<form action="ViewListingServlet" method="post">
 		            		<input type="hidden" name="listingId" value="${listing.listing_id}" />

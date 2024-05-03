@@ -54,4 +54,14 @@
     <servlet-name>ViewListingServlet</servlet-name>
     <url-pattern>/ViewListingServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>sellerDashBoardServlet</display-name>
+    <servlet-name>sellerDashBoardServlet</servlet-name>
+    <servlet-class>edu.mu.servlet.sellerDashBoardServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sellerDashBoardServlet</servlet-name>
+    <url-pattern>/sellerDashBoardServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
