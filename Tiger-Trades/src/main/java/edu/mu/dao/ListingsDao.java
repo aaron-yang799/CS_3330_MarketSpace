@@ -113,6 +113,7 @@ public class ListingsDao {
 			System.out.println(set);
 			if (!set.next()) {
 			    System.out.println("ResultSet is empty.");
+			    return null;
 			} else {
 			    do {
 			    	System.out.println(set.getFloat("Minimum_Bid"));

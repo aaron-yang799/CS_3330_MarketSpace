@@ -27,9 +27,6 @@ public class sellerDashBoardServlet extends HttpServlet {
 	        User user = (User)userObj;
 	        
 	        ArrayList<ListingPreview> userListing = ListingsDao.getUserListings(user);
-	        if(userListing.isEmpty()) {
-	    		request.getRequestDispatcher("sellerDashboard.jsp").forward(request, response);	
-	        }
 	        session.setAttribute("userListing", userListing);
 		}
 		request.getRequestDispatcher("sellerDashboard.jsp").forward(request, response);	
