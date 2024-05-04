@@ -177,14 +177,11 @@ public class ListingsDao {
 	        ResultSet rs = ps.executeQuery();
 	        
 	        if (rs.next()) {
-	            float currentMinBid = rs.getFloat("Minimum_Bid");
-	            if (bid > currentMinBid) { // Ensure the new bid is actually higher
-	                PreparedStatement ps2 = connection.prepareStatement("UPDATE Listing SET Minimum_Bid = ? WHERE Listing_ID = ?");
-	                ps2.setFloat(1, bid);
-	                ps2.setInt(2, listingID);
-	                ps2.executeUpdate();
-	                connection.commit(); // Commit the transaction, if necessary
-	            }
+                PreparedStatement ps2 = connection.prepareStatement("UPDATE Listing SET Minimum_Bid = ? WHERE Listing_ID = ?");
+                ps2.setFloat(1, bid);
+                ps2.setInt(2, listingID);
+                ps2.executeUpdate();
+                connection.commit();
 	        }		
 	    } catch (SQLException e) {
 			// TODO Auto-generated catch block
