@@ -10,16 +10,18 @@ public class Listing {
 	private Date timeEnd;
 	private String description;
 	private float minimumBid;
+	private float highestBid;
 	private float buyOutPrice;
 	private ArrayList<Bid> bidList;
 	private ArrayList<User> watchList;
 	
-	public Listing(String title, Date timePosted, Date timeEnd, String description, float minimumBid, float buyOutPrice) {
+	public Listing(String title, Date timePosted, Date timeEnd, String description, float minimumBid, float highestBid, float buyOutPrice) {
 		this.title = title;
 		this.timePosted = timePosted;
 		this.timeEnd = timeEnd;
 		this.description = description;
 		this.minimumBid = minimumBid;
+		this.highestBid = highestBid;
 		this.buyOutPrice = buyOutPrice;
 		this.bidList = new ArrayList<Bid>();
 		this.watchList = new ArrayList<User>();
@@ -31,6 +33,7 @@ public class Listing {
 		this.timeEnd = listing.timeEnd;
 		this.description = listing.description;
 		this.minimumBid = listing.minimumBid;
+		this.highestBid = listing.highestBid;
 		this.buyOutPrice = listing.buyOutPrice;
 		this.bidList = listing.bidList;
 		this.watchList = listing.watchList;
@@ -75,6 +78,14 @@ public class Listing {
 	public void setMinimumBid(float minimumBid) {
 		this.minimumBid = minimumBid;
 	}
+	
+	public float getHighestBid() {
+		return highestBid;
+	}
+
+	public void setHighestBid(float minimumBid) {
+		this.highestBid = minimumBid;
+	}
 
 	public float getBuyOutPrice() {
 		return buyOutPrice;
@@ -100,7 +111,7 @@ public class Listing {
 		this.watchList = watchList;
 	}
 	
-	public float getHighestBid() {
+	public float getHighestBidList() {
 		float highestBid = (float) 0.00;
 		
 		for(Bid bid : this.bidList) {

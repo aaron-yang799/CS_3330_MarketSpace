@@ -18,17 +18,32 @@ public class CreateBidServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int listingID = Integer.parseInt(request.getParameter("listingId"));
-		float ListingBid = Float.parseFloat(request.getParameter("listingBid"));
+		float minimumBid = Float.parseFloat(request.getParameter("minimumBid"));
+		float highestBid = Float.parseFloat(request.getParameter("highestBid"));
 		float UserBid = Float.parseFloat(request.getParameter("userBid"));
 		
-		if (UserBid > ListingBid){
+		if (UserBid > minimumBid && UserBid > highestBid){
 			ListingsDao.createBid(listingID, UserBid);
 			//TODO MAKE A BID CREATED POPUP
 			request.getRequestDispatcher("listingView.jsp").forward(request, response);
 		}
-		String lowBidError = "Your bid must be higher than the minimum bid.";
-		request.setAttribute("lowBidError", lowBidError);
-		request.getRequestDispatcher("listingView.jsp").forward(request, response);
-
+		
+		else if(UserBid < minimumBid && UserBid < highestBid) {
+			String underAllError = "Your bid must be higher than the minimum bid and current highest bid.";
+			request.setAttribute("underAllError", underAllError);
+			request.getRequestDispatcher("listingView.jsp").forward(request, response);
+		}
+		
+		else if(UserBid < highestBid && UserBid > minimumBid) {
+			String underHighBidError = "Your bid must be higher than the current highest bid.";
+			request.setAttribute("underHighBidError", underHighBidError);
+			request.getRequestDispatcher("listingView.jsp").forward(request, response);
+		}
+		
+		else if(UserBid < minimumBid) {
+			String underMinBidError = "Your bid must be higher than the minimum bid.";
+			request.setAttribute("underMinBidError", underMinBidError);
+			request.getRequestDispatcher("listingView.jsp").forward(request, response);
+		}
 	}
 }

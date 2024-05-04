@@ -61,7 +61,7 @@ public class ListingsDao {
 	public static ArrayList<ListingPreview> getOtherListingsPrev(User user) {
 		ArrayList<ListingPreview> listings = new ArrayList<ListingPreview>();
 		try {
-			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimeEnd, Minimum_Bid FROM Listing WHERE User_ID != ?");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimeEnd, Highest_Bid FROM Listing WHERE User_ID != ?");
 			System.out.println(user);
 			ps.setInt(1, user.getUserid());
 			
@@ -74,7 +74,7 @@ public class ListingsDao {
 			    System.out.println("ResultSet is empty.");
 			} else {
 			    do {
-			    	System.out.println(set.getFloat("Minimum_Bid"));
+			    	System.out.println(set.getFloat("Highest_Bid"));
 			    	int listing_id = set.getInt("Listing_ID");
 					String title = set.getString("Title");
 					LocalDate timeEnd = set.getDate("TimeEnd").toLocalDate();
@@ -85,7 +85,7 @@ public class ListingsDao {
 					ResultSet set2 = ps2.executeQuery();
 					if(!set2.next()) {
 						System.out.println("ResultSet2 is empty.");
-						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
+						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Highest_Bid")));
 					} else {
 						float highest = set2.getFloat("Amount_Bid");
 						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, highest));
@@ -148,20 +148,20 @@ public class ListingsDao {
 	public static Listing getListingByID(int ID) {
 		Listing listing = null;
 		try {
-			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimePosted, TimeEnd, Listing_Description, Minimum_Bid, Buy_Out FROM Listing WHERE Listing_ID = ?");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimePosted, TimeEnd, Listing_Description, Minimum_Bid, Highest_Bid, Buy_Out FROM Listing WHERE Listing_ID = ?");
 			ps.setInt(1, ID);
 			
 			ResultSet rs = ps.executeQuery();
 			
 			if(rs.next()) {
-				
-				listing = new Listing(null, null, null, null, 0, 0);
+				listing = new Listing(null, null, null, null, 0, 0, 0);
 				listing.setListing_id(rs.getInt("Listing_ID"));
 				listing.setTitle(rs.getString("title"));
 				listing.setTimePosted(rs.getDate("TimePosted"));
 				listing.setTimeEnd(rs.getDate("TimeEnd"));
 				listing.setDescription(rs.getString("Listing_Description"));
 				listing.setMinimumBid(rs.getFloat("Minimum_Bid"));
+				listing.setHighestBid(rs.getFloat("Highest_Bid"));
 				listing.setBuyOutPrice(rs.getFloat("Buy_Out"));
 			}
 			ps.close();
@@ -175,12 +175,12 @@ public class ListingsDao {
 	public static void createBid(int listingID, float bid) {
 		try {
 	        Connection connection = DatabaseConnectionDao.getInstance().getConnection();
-	        PreparedStatement ps = connection.prepareStatement("SELECT Minimum_Bid FROM Listing WHERE Listing_ID = ?");
+	        PreparedStatement ps = connection.prepareStatement("SELECT Highest_Bid FROM Listing WHERE Listing_ID = ?");
 	        ps.setInt(1, listingID);
 	        ResultSet rs = ps.executeQuery();
 	        
 	        if (rs.next()) {
-                PreparedStatement ps2 = connection.prepareStatement("UPDATE Listing SET Minimum_Bid = ? WHERE Listing_ID = ?");
+                PreparedStatement ps2 = connection.prepareStatement("UPDATE Listing SET Highest_Bid = ? WHERE Listing_ID = ?");
                 ps2.setFloat(1, bid);
                 ps2.setInt(2, listingID);
                 ps2.executeUpdate();

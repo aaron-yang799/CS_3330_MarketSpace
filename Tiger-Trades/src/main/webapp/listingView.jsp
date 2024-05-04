@@ -86,20 +86,27 @@
 			            <p><strong>Posted:</strong> <fmt:formatDate value="${sessionScope.listing.timePosted}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Ends:</strong> <fmt:formatDate value="${sessionScope.listing.timeEnd}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Minimum Bid:</strong> $<fmt:formatNumber value="${sessionScope.listing.minimumBid}"/></p>
+			            <p><strong>Highest Bid:</strong> $<fmt:formatNumber value="${sessionScope.listing.highestBid}"/></p>
 			        </div>
 			        <div class="col">
 			            <label for="userBid"><strong>Submit a Bid (USD)</strong></label>
 			            <form action="CreateBidServlet" method="post">
 				            <input type="hidden" name="listingId" value="${sessionScope.listing.listing_id}"/>
-				            <input type="hidden" name="listingBid" value="${sessionScope.listing.minimumBid}"/>
+				            <input type="hidden" name="minimumBid" value="${sessionScope.listing.minimumBid}"/>
+				            <input type="hidden" name="highestBid" value="${sessionScope.listing.highestBid}"/>
 				            <div class="input-group">
 									<input id="autoDecimal" name="userBid" maxlength="20" class="form-control" max="9999999999999" placeholder="Bid amount">
 									<button type="submit" class = 'btn btn-success'>Submit</button>
 							</div>
 						</form>
-			        
-				        <c:if test="${not empty lowBidError}">
-		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${lowBidError}"/></p>
+				        <c:if test="${not empty underAllError}">
+		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${underAllError}"/></p>
+	    				</c:if>
+	    				<c:if test="${not empty underHighBidError}">
+		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${underHighBidError}"/></p>
+	    				</c:if>
+	    				<c:if test="${not empty underMinBidError}">
+		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${underMinBidError}"/></p>
 	    				</c:if>
 	    				<label for="userBid"><strong>or</strong></label>
 	    				<button type='submit' class='btn btn-success w-100'><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></button>
