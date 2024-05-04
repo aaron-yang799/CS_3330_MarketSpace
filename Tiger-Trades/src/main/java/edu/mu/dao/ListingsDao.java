@@ -1,5 +1,6 @@
 package edu.mu.dao;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -170,16 +171,22 @@ public class ListingsDao {
 	
 	public static void createBid(int listingID, float bid) {
 		try {
-			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Minimum_Bid FROM Listing WHERE Listing_ID = ?");
-			ps.setInt(1, listingID);
-			ResultSet rs = ps.executeQuery();
-			
-			if(rs.next()) {
-				PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("UPDATE Listing SET Minimum_Bid = ?");
-				ps2.setFloat(1, bid);
-			}
-			
-		} catch (SQLException e) {
+	        Connection connection = DatabaseConnectionDao.getInstance().getConnection();
+	        PreparedStatement ps = connection.prepareStatement("SELECT Minimum_Bid FROM Listing WHERE Listing_ID = ?");
+	        ps.setInt(1, listingID);
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            float currentMinBid = rs.getFloat("Minimum_Bid");
+	            if (bid > currentMinBid) { // Ensure the new bid is actually higher
+	                PreparedStatement ps2 = connection.prepareStatement("UPDATE Listing SET Minimum_Bid = ? WHERE Listing_ID = ?");
+	                ps2.setFloat(1, bid);
+	                ps2.setInt(2, listingID);
+	                ps2.executeUpdate();
+	                connection.commit(); // Commit the transaction, if necessary
+	            }
+	        }		
+	    } catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
