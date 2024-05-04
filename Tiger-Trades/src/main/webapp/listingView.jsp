@@ -48,6 +48,7 @@
             margin-right: 5px;
         }
         
+        
     </style>
     <script>
 	    document.addEventListener('DOMContentLoaded', function() {
@@ -98,7 +99,7 @@
 						</form>
 			        
 				        <c:if test="${not empty lowBidError}">
-		            		<p style="color: red;">❗ <c:out value="${lowBidError}"/></p>
+		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${lowBidError}"/></p>
 	    				</c:if>
 	    				<label for="userBid"><strong>or</strong></label>
 	    				<button type='submit' class='btn btn-success w-100'><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></button>
