@@ -94,6 +94,7 @@
 				            <input type="hidden" name="listingId" value="${sessionScope.listing.listing_id}"/>
 				            <input type="hidden" name="minimumBid" value="${sessionScope.listing.minimumBid}"/>
 				            <input type="hidden" name="highestBid" value="${sessionScope.listing.highestBid}"/>
+				            <input type="hidden" name="listingTitle" value="${sessionScope.listing.title}"/>
 				            <div class="input-group">
 									<input id="autoDecimal" name="userBid" maxlength="20" class="form-control" max="9999999999999" placeholder="Bid amount">
 									<button type="submit" class = 'btn btn-success'>Submit</button>

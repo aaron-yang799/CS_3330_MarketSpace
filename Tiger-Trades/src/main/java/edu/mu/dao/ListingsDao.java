@@ -184,7 +184,6 @@ public class ListingsDao {
                 ps2.setFloat(1, bid);
                 ps2.setInt(2, listingID);
                 ps2.executeUpdate();
-                connection.commit();
                 ps2.close();
 	        }
 	        ps.close();

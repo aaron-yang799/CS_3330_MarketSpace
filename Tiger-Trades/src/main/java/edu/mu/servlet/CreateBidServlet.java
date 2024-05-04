@@ -17,15 +17,17 @@ public class CreateBidServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String listingTitle = request.getParameter("listingTitle");
 		int listingID = Integer.parseInt(request.getParameter("listingId"));
 		float minimumBid = Float.parseFloat(request.getParameter("minimumBid"));
 		float highestBid = Float.parseFloat(request.getParameter("highestBid"));
 		float UserBid = Float.parseFloat(request.getParameter("userBid"));
+
 		
 		if (UserBid > minimumBid && UserBid > highestBid){
 			ListingsDao.createBid(listingID, UserBid);
-			//TODO MAKE A BID CREATED POPUP
-			request.getRequestDispatcher("listingView.jsp").forward(request, response);
+			request.setAttribute("listingTitle", listingTitle);
+			request.getRequestDispatcher("placedBidSuccess.jsp").forward(request, response);
 		}
 		
 		else if(UserBid < minimumBid && UserBid < highestBid) {
