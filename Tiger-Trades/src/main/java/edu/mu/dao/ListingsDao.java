@@ -50,11 +50,11 @@ public class ListingsDao {
 			if(rs.next()) {
 				//if listing found do something
 			}
+			ps.close();
 
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-				
 		return Listings;
 	}
 	
@@ -92,6 +92,7 @@ public class ListingsDao {
 					}
 			    } while (set.next()); // Move to the next row and check if it exists
 			}
+			ps.close();
 		}catch(SQLException e) {
 
 			e.printStackTrace();
@@ -135,6 +136,7 @@ public class ListingsDao {
 					}
 			    } while (set.next()); // Move to the next row and check if it exists
 			}
+			ps.close();
 		}catch(SQLException e) {
 
 			e.printStackTrace();
@@ -162,6 +164,7 @@ public class ListingsDao {
 				listing.setMinimumBid(rs.getFloat("Minimum_Bid"));
 				listing.setBuyOutPrice(rs.getFloat("Buy_Out"));
 			}
+			ps.close();
 		}catch(SQLException e) {
 
 			e.printStackTrace();
@@ -182,8 +185,38 @@ public class ListingsDao {
                 ps2.setInt(2, listingID);
                 ps2.executeUpdate();
                 connection.commit();
-	        }		
+                ps2.close();
+	        }
+	        ps.close();
+            connection.close();
+
 	    } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void listingToOrder(Listing listing) {
+		Connection connection = DatabaseConnectionDao.getInstance().getConnection();
+		try {
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO Auction_Order (Item, Arrival_Date, Total_Cost, Order_Status) VALUES (?, ?, ?, ?)");
+			ps.setInt(1, 66);
+			ps.setDate(2, listing.getTimeEnd());
+			ps.setFloat(3, listing.getHighestBid() + 10);
+			ps.setString(4, "Packing");
+			ps.executeUpdate();
+			
+			PreparedStatement ps2 = connection.prepareStatement("DELETE FROM Listing WHERE Listing_ID = ?");
+			ps2.setInt(1, listing.getListing_id());
+			
+			int rowsDeleted = ps2.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("A listing was deleted!");
+            }
+            ps.close();
+            ps2.close();
+            connection.close();
+		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

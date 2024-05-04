@@ -67,8 +67,9 @@
 	    	<br>
 	        	<c:if test="${not empty sessionScope.otherListingsPrev}">
 		        	<c:forEach var="listing" items="${sessionScope.otherListingsPrev}">
-		            	<form action="ViewListingServlet" method="get">
-		            		<input type="hidden" name="listingId" value="${listing.listing_id}" />
+		            	<form action="ViewListingServlet" method="post">
+		            		<input type="hidden" name="listingId" value="${listing.listing_id}"/>
+		            		<input type="hidden" name="listingTime" value="${listing.timeUntilEnd}"/>
 		                	<button type="submit" class="listing-button p-3 my-2 rounded-pill text-decoration-none vh-150 w-100">
 			                	<div class="information-container">
 				                	<div class="listing-title">

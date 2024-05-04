@@ -22,10 +22,19 @@ import edu.mu.model.User;
 public class ViewListingServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			int listing_id = Integer.parseInt(request.getParameter("listingId"));
 			Listing listing = ListingsDao.getListingByID(listing_id);
+			
+			if(Integer.parseInt(request.getParameter("listingTime")) <= 0) {
+				ListingsDao.listingToOrder(listing);
+				HttpSession session = request.getSession();
+				session.setAttribute("listing", listing);
+				
+				RequestDispatcher dispatcher = request.getRequestDispatcher("auctionEnded.jsp");
+				dispatcher.forward(request, response);
+			}
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("listing", listing);
