@@ -40,8 +40,35 @@
 		    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 		}
 		
-		
+		.input-group {
+            display: flex;
+        }
+        .input-group input {
+            flex-grow: 1;
+            margin-right: 5px;
+        }
+        
     </style>
+    <script>
+	    document.addEventListener('DOMContentLoaded', function() {
+	        const inputField = document.getElementById('autoDecimal');
+	
+	        inputField.addEventListener('input', function(e) {
+	            let input = e.target.value.replace(/[^0-9]/g, ''); // Strip out non-numeric characters
+	            if (input.length === 0) {
+	                e.target.value = ''; // If no digits, leave empty
+	            } else if (input.length === 1) {
+	                e.target.value = '0.0' + input; // For single digit, prefix with 0.0
+	            } else if (input.length === 2) {
+	                e.target.value = '0.' + input; // For two digits, prefix with 0.
+	            } else {
+	                let integerPart = input.slice(0, -2);  // Extract all digits except the last two
+	                let decimalPart = input.slice(-2); // Last two digits
+	                e.target.value = parseInt(integerPart) + '.' + decimalPart; // Combine with a decimal point, removing any leading zeros
+	            }
+	        });
+	    }); 
+	</script>
 </head>
 <body>
     <div class="background-image">
@@ -58,10 +85,23 @@
 			            <p><strong>Posted:</strong> <fmt:formatDate value="${sessionScope.listing.timePosted}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Ends:</strong> <fmt:formatDate value="${sessionScope.listing.timeEnd}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Minimum Bid:</strong> $<fmt:formatNumber value="${sessionScope.listing.minimumBid}"/></p>
-			            <p><strong>Buyout Price:</strong> $<fmt:formatNumber value="${sessionScope.listing.buyOutPrice}"/></p>
 			        </div>
 			        <div class="col">
-			            
+			            <label for="userBid"><strong>Submit a Bid (USD)</strong></label>
+			            <form action="CreateBidServlet" method="post">
+				            <input type="hidden" name="listingId" value="${sessionScope.listing.listing_id}"/>
+				            <input type="hidden" name="listingBid" value="${sessionScope.listing.minimumBid}"/>
+				            <div class="input-group">
+									<input id="autoDecimal" name="userBid" maxlength="20" class="form-control" max="9999999999999" placeholder="Bid amount">
+									<button type="submit" class = 'btn btn-success'>Submit</button>
+							</div>
+						</form>
+			        
+				        <c:if test="${not empty lowBidError}">
+		            		<p style="color: red;">❗ <c:out value="${lowBidError}"/></p>
+	    				</c:if>
+	    				<label for="userBid"><strong>or</strong></label>
+	    				<button type='submit' class='btn btn-success w-100'><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></button>
 			        </div>
 			    </div>
 			</div>
