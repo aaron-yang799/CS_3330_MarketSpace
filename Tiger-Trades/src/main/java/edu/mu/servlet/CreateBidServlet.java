@@ -1,5 +1,6 @@
 package edu.mu.servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +29,8 @@ public class CreateBidServlet extends HttpServlet {
 			ListingsDao.createBid(listingID, UserBid);
 			request.setAttribute("listingTitle", listingTitle);
 			request.setAttribute("BidCreated", "Created!");
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+		    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+			rd.forward(request, response);
 		}
 		
 		else if(UserBid < minimumBid && UserBid < highestBid) {
