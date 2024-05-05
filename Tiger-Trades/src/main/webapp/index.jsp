@@ -60,6 +60,7 @@
 </head>
 <body>
 	<%@ include file="listingCreated.jsp" %>
+	<%@ include file="placedBidSuccess.jsp" %>
 	<div class="background-image">
 		<%@ include file="header.jsp" %>
 	    <div id=listing-container>
@@ -97,6 +98,9 @@
         <c:if test="${not empty listingCreated}">
             $("#myModal").modal('show');
         </c:if>
+        <c:if test="${not empty BidCreated}">
+        	$("#PlacedBidModal").modal('show');
+    	</c:if>
     });
 	</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

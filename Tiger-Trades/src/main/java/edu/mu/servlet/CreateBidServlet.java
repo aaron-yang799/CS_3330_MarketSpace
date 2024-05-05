@@ -27,7 +27,8 @@ public class CreateBidServlet extends HttpServlet {
 		if (UserBid > minimumBid && UserBid > highestBid){
 			ListingsDao.createBid(listingID, UserBid);
 			request.setAttribute("listingTitle", listingTitle);
-			request.getRequestDispatcher("placedBidSuccess.jsp").forward(request, response);
+			request.setAttribute("BidCreated", "Created!");
+			request.getRequestDispatcher("index.jsp").forward(request, response);
 		}
 		
 		else if(UserBid < minimumBid && UserBid < highestBid) {

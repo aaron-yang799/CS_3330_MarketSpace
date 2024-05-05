@@ -9,7 +9,7 @@
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	<div class="modal" tabindex="-1" role="dialog" id="myModal">
+	<div class="modal" tabindex="-1" role="dialog" id="placedBidModal">
   		<div class="modal-dialog modal-dialog-centered  align-items-center d-flex" role="document">
     		<div class="modal-content ">
       			<div class="modal-header">
@@ -19,7 +19,7 @@
         			</button>
       			</div>
       			<div class="modal-body">
-        			<p>You have successfully placed a bid on ${listingTitle}!</p>
+        			<p>You have successfully placed a bid on ${sessionScope.listing.getTitle()}!</p>
       			</div>
 				<div class="modal-footer">
     				<a href="bids.jsp" class="btn btn-success">View current bids</a>
