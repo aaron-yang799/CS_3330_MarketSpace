@@ -74,4 +74,14 @@
     <servlet-name>CreateBidServlet</servlet-name>
     <url-pattern>/CreateBidServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditBidServlet</display-name>
+    <servlet-name>EditBidServlet</servlet-name>
+    <servlet-class>edu.mu.servlet.EditBidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditBidServlet</servlet-name>
+    <url-pattern>/EditBidServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

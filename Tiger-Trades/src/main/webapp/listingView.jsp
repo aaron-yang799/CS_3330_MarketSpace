@@ -90,7 +90,7 @@
 			        </div>
 			        <div class="col">
 			            <label for="userBid"><strong>Submit a Bid (USD)</strong></label>
-			            <form action="CreateBidServlet" method="post">
+			            <form action="EditBidServlet" method="post">
 				            <input type="hidden" name="listingId" value="${sessionScope.listing.listing_id}"/>
 				            <input type="hidden" name="minimumBid" value="${sessionScope.listing.minimumBid}"/>
 				            <input type="hidden" name="highestBid" value="${sessionScope.listing.highestBid}"/>
