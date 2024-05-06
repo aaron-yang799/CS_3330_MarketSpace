@@ -9,7 +9,6 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import edu.mu.model.User;
-import jakarta.servlet.http.HttpSession;
 import edu.mu.model.Bid;
 import edu.mu.model.Listing;
 import edu.mu.model.ListingPreview;
