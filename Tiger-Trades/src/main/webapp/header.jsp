@@ -112,6 +112,7 @@
                             <div class="dropdown float-right">
                                 <button class="mt-2"> Hey, <%= user.getUsername() %>!</button>
                                 <div class="dropdown-content-item">
+                                	<a href="wallet.jsp">My Wallet</a>
                                     <a href="bids.jsp">Bids</a>
                                     <a href="sellerDashBoardServlet">Seller Dashboard</a>
                                     <a href="LogOutServlet">Logout</a>
