@@ -54,6 +54,10 @@
      .listing-button:hover {
      	background-color: #D3D3D3;
      }
+     
+     .bid-time {
+     	text-align: right;
+     }
         
 	
 </style>
@@ -76,7 +80,7 @@
 				                	<div class="listing-title">
 				                		<span class="h5">${listing.title}</span>
 				                	</div>
-				                	<div>
+				                	<div class="bid-time">
 					                    <div class="listing-bid">
 					                    	<span>Highest Bid: <fmt:formatNumber value="${listing.highest_bid}" type="currency" /></span>
 					                    </div>
