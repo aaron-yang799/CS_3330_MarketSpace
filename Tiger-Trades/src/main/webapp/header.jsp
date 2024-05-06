@@ -43,6 +43,7 @@
     .dropdown {
         position: relative;
         display: inline-block;
+        margin-right: 15px;
     }
     .dropdown-content-item {
         display: none;
