@@ -65,6 +65,7 @@
 <body>
 	<%@ include file="listingCreated.jsp" %>
 	<%@ include file="placedBidSuccess.jsp" %>
+	<%@ include file="BoughtOutModal.jsp" %>
 	<div class="background-image">
 		<%@ include file="header.jsp" %>
 	    <div id=listing-container>
@@ -106,6 +107,11 @@
     $(document).ready(function() {
         <c:if test="${not empty BidCreated}">
             $("#placedBidModal").modal('show');
+        </c:if>
+	});
+    $(document).ready(function() {
+        <c:if test="${not empty boughtOut}">
+            $("#boughtOutModal").modal('show');
         </c:if>
 	});
 	</script>
