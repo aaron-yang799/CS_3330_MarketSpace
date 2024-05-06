@@ -87,11 +87,24 @@ public class ListingsDao {
 						System.out.println("ResultSet2 is empty.");
 						if( timeUntilEnd <= 0) {
 							ListingsDao.deleteListing(listing_id);
+							
 						}else {
 							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
 						}
 					} else {
 						if( timeUntilEnd <= 0) {
+							Listing listing = getListingByID(listing_id);
+							PreparedStatement ps3 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Wallet FROM Auction_User WHERE User_ID = ?");
+							ps3.setInt(1, set2.getInt("Bidder_ID"));
+							ResultSet rs3 = ps3.executeQuery();
+							if(rs3.next()) {
+								PreparedStatement ps4 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("UPDATE Auction_User SET Wallet = ? WHERE User_ID = ?");
+								ps4.setInt(2, set2.getInt("Bidder_ID"));
+								ps4.setFloat(1, rs3.getFloat("Wallet") - (float) (listing.getHighestBid() * 1.08));
+								ps4.executeUpdate();
+								ps4.close();
+							}
+							ps3.close();
 							ListingsDao.listingToOrder(listing_id, set2.getInt("Bidder_ID"));
 						}else {
 							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set2.getFloat("Amount_Bid")));
@@ -143,6 +156,18 @@ public class ListingsDao {
 						}
 					} else {
 						if( timeUntilEnd <= 0) {
+							Listing listing = getListingByID(listing_id);
+							PreparedStatement ps3 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Wallet FROM Auction_User WHERE User_ID = ?");
+							ps3.setInt(1, set2.getInt("Bidder_ID"));
+							ResultSet rs3 = ps3.executeQuery();
+							if(rs3.next()) {
+								PreparedStatement ps4 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("UPDATE Auction_User SET Wallet = ? WHERE User_ID = ?");
+								ps4.setInt(2, set2.getInt("Bidder_ID"));
+								ps4.setFloat(1, rs3.getFloat("Wallet") - (float) (listing.getHighestBid() * 1.08));
+								ps4.executeUpdate();
+								ps4.close();
+							}
+							ps3.close();
 							ListingsDao.listingToOrder(listing_id, set2.getInt("Bidder_ID"));
 						}else {
 							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set2.getFloat("Amount_Bid")));
