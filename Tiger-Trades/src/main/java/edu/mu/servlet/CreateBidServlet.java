@@ -29,14 +29,8 @@ public class CreateBidServlet extends HttpServlet {
 		float highestBid = Float.parseFloat(request.getParameter("highestBid"));
 		float UserBid = Float.parseFloat(request.getParameter("userBid"));
 		float UserBalance = Float.parseFloat(request.getParameter("userBalance"));
-
-		if (UserBalance < UserBid) {
-			String brokeAhhUserError = "You don't have enough money in your wallet to make that bid.";
-			request.setAttribute("brokeAhhUserError", brokeAhhUserError);
-			request.getRequestDispatcher("listingView.jsp").forward(request, response);
-		}
-		
-		if (UserBid > minimumBid && UserBid > highestBid){
+				
+		if (UserBid > minimumBid && UserBid > highestBid && UserBalance > UserBid){
 			HttpSession session = request.getSession();
             Object userObj = session.getAttribute("user");
             User user = (User) userObj;
@@ -56,6 +50,12 @@ public class CreateBidServlet extends HttpServlet {
 			
 		    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
+		}
+		
+		else if (UserBalance < UserBid) {
+			String brokeAhhUserError = "You don't have enough money in your wallet to make that bid.";
+			request.setAttribute("brokeAhhUserError", brokeAhhUserError);
+			request.getRequestDispatcher("listingView.jsp").forward(request, response);
 		}
 		
 		else if(UserBid < minimumBid && UserBid < highestBid) {
