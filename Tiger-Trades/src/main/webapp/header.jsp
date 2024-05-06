@@ -97,13 +97,38 @@
         <div class="col">
             <div class="custom-header">
                 <div class="row w-100">
-                    <div class="col-6 title-container">
+                	<%
+                    	String pathInfo = request.getServletPath(); 
+                		String thisPage;
+                		switch(pathInfo){
+                			case "/index.jsp":
+                				thisPage = "Listings";
+                				break;
+                			case "/newListing.jsp":
+                				thisPage = "New Listing";
+                				break;
+                			case "/sellerDashboard.jsp":
+                				thisPage = "Your Listings";
+                				break;
+                			case "wallet.jsp":
+                				thisPage = "Your Wallet";
+                			default:
+                				thisPage = null;
+                				break;	
+                		}
+					%>
+                    <div class="col-4 title-container">
                         <div class="title">
                             <a href="index.jsp" id="TigerTradesIcon" class="indexLink">TigerTrades&nbsp;</a>
                             <a href="https://github.com/aaron-yang799/CS_3330_MarketSpace"><img src="images/github-white.png" alt="github" height="32px" width="32px" class="mb-1"></a>
                         </div>
                     </div>
-                    <div class="col-6 link-container justify-content-end">
+                    <div class="col-4 justify-content-center align-items-center mt-3 mb-0 h5" style="font-family: 'Graphik';">
+                    	<div style="text-align: center">
+                    		<p><%= thisPage != null ? thisPage : "" %></p>
+                    	</div>
+                    </div>
+                    <div class="col-4 link-container justify-content-end">
                         <% 
                             Object userObj = session.getAttribute("user");
                             User user = (User) userObj; // Cast it to the User class
