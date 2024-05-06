@@ -95,11 +95,15 @@
 				            <input type="hidden" name="minimumBid" value="${sessionScope.listing.minimumBid}"/>
 				            <input type="hidden" name="highestBid" value="${sessionScope.listing.highestBid}"/>
 				            <input type="hidden" name="listingTitle" value="${sessionScope.listing.title}"/>
+				            <input type="hidden" name="userBalance" value="${sessionScope.user.getWallet()}"/>
 				            <div class="input-group">
 									<input id="autoDecimal" name="userBid" maxlength="20" class="form-control" max="9999999999999" placeholder="Bid amount">
 									<button type="submit" class = 'btn btn-success'>Submit</button>
 							</div>
 						</form>
+						<c:if test="${not empty brokeAhhUserError}">
+		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${brokeAhhUserError}"/></p>
+	    				</c:if>
 				        <c:if test="${not empty underAllError}">
 		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${underAllError}"/></p>
 	    				</c:if>
