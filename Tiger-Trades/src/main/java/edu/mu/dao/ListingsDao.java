@@ -63,7 +63,7 @@ public class ListingsDao {
 	public static ArrayList<ListingPreview> getOtherListingsPrev(User user) {
 		ArrayList<ListingPreview> listings = new ArrayList<ListingPreview>();
 		try {
-			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimeEnd, Highest_Bid FROM Listing WHERE User_ID != ?");
+			PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Listing_ID, Title, TimeEnd, Minimum_Bid FROM Listing WHERE User_ID != ?");
 			System.out.println(user);
 			ps.setInt(1, user.getUserid());
 			
@@ -76,21 +76,27 @@ public class ListingsDao {
 			    System.out.println("ResultSet is empty.");
 			} else {
 			    do {
-			    	System.out.println(set.getFloat("Highest_Bid"));
 			    	int listing_id = set.getInt("Listing_ID");
 					String title = set.getString("Title");
 					LocalDate timeEnd = set.getDate("TimeEnd").toLocalDate();
 					long timeUntilEnd = ChronoUnit.DAYS.between(LocalDate.now(), timeEnd);
 					// getting all bids for the current listing in the result set.
-					PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Amount_Bid FROM Bid WHERE Listing_ID = ? ORDER BY Amount_Bid DESC LIMIT 1");
+					PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Amount_Bid, Bidder_ID FROM Bid WHERE Listing_ID = ? ORDER BY Amount_Bid DESC LIMIT 1");
 					ps2.setInt(1, listing_id);
 					ResultSet set2 = ps2.executeQuery();
 					if(!set2.next()) {
 						System.out.println("ResultSet2 is empty.");
-						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Highest_Bid")));
+						if( timeUntilEnd <= 0) {
+							ListingsDao.deleteListing(listing_id);
+						}else {
+							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
+						}
 					} else {
-						float highest = set2.getFloat("Amount_Bid");
-						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, highest));
+						if( timeUntilEnd <= 0) {
+							ListingsDao.listingToOrder(listing_id, set2.getInt("Bidder_ID"));
+						}else {
+							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set2.getFloat("Amount_Bid")));
+						}
 					}
 			    } while (set.next()); // Move to the next row and check if it exists
 			}
@@ -126,15 +132,22 @@ public class ListingsDao {
 					LocalDate timeEnd = set.getDate("TimeEnd").toLocalDate();
 					long timeUntilEnd = ChronoUnit.DAYS.between(LocalDate.now(), timeEnd);
 					// getting all bids for the current listing in the result set.
-					PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Amount_Bid FROM Bid WHERE Listing_ID = ? ORDER BY Amount_Bid DESC LIMIT 1");
+					PreparedStatement ps2 = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT Amount_Bid, Bidder_ID FROM Bid WHERE Listing_ID = ? ORDER BY Amount_Bid DESC LIMIT 1");
 					ps2.setInt(1, listing_id);
 					ResultSet set2 = ps2.executeQuery();
 					if(!set2.next()) {
 						System.out.println("ResultSet2 is empty.");
-						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
+						if( timeUntilEnd <= 0) {
+							ListingsDao.deleteListing(listing_id);
+						}else {
+							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set.getFloat("Minimum_Bid")));
+						}
 					} else {
-						float highest = set2.getFloat("Amount_Bid");
-						listings.add(new ListingPreview(listing_id, title, timeUntilEnd, highest));
+						if( timeUntilEnd <= 0) {
+							ListingsDao.listingToOrder(listing_id, set2.getInt("Bidder_ID"));
+						}else {
+							listings.add(new ListingPreview(listing_id, title, timeUntilEnd, set2.getFloat("Amount_Bid")));
+						}
 					}
 			    } while (set.next()); // Move to the next row and check if it exists
 			}
@@ -220,15 +233,9 @@ public class ListingsDao {
 			ps.setInt(3, user_id);
 			ps.executeUpdate();
 			
-			PreparedStatement ps2 = connection.prepareStatement("DELETE FROM Listing WHERE Listing_ID = ?");
-			ps2.setInt(1, listing.getListing_id());
+			ListingsDao.deleteListing(listing_id);
 			
-			int rowsDeleted = ps2.executeUpdate();
-            if (rowsDeleted > 0) {
-                System.out.println("A listing was deleted!");
-            }
-            ps.close();
-            ps2.close();
+			ps.close();
             connection.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -259,6 +266,25 @@ public class ListingsDao {
 
         return bids;
     }
+	
+	public static boolean deleteListing(int listing_id) {
+		Connection connection = DatabaseConnectionDao.getInstance().getConnection();
+		try {
+			PreparedStatement ps2 = connection.prepareStatement("DELETE FROM Listing WHERE Listing_ID = ?");
+			ps2.setInt(1, listing_id);
+			
+			int rowsDeleted = ps2.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("A listing was deleted!");
+            }
+            ps2.close();
+            return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 }
 
 
