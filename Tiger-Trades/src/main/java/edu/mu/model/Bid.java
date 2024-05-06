@@ -6,11 +6,6 @@ public class Bid {
 	private float amountBidded;
 	private Listing listItem;
 	
-	public Bid(User bidder, float amountBidded, Listing listItem) {
-		this.bidder = bidder;
-		this.amountBidded = amountBidded;
-		this.listItem = listItem;
-	}
 
 	public Bid(int bidID, User bidder, float amountBidded, Listing listItem) {
 		this.bidID = bidID;

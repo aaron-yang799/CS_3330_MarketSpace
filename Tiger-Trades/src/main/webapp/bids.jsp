@@ -62,7 +62,7 @@
         <div id="center-div">
             <br>
             <c:if  test="${not empty sessionScope.BidList}">
-                <c:forEach  var="Did" items="${sessionScope.BidList}">
+                <c:forEach  var="Bid" items="${sessionScope.BidList}">
                         <button type="submit" class="listing-button p-3 my-2 rounded-pill vh-150 w-100">
                             <div class="information-container">
                                 <div class="listing-title">

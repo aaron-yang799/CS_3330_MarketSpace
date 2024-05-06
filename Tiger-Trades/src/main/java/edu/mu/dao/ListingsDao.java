@@ -9,6 +9,7 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import edu.mu.model.User;
+import jakarta.servlet.http.HttpSession;
 import edu.mu.model.Bid;
 import edu.mu.model.Listing;
 import edu.mu.model.ListingPreview;
@@ -173,7 +174,7 @@ public class ListingsDao {
 		return listing;
 	}
 	
-	public static void createBid(int listingID, float bid) {
+	public static void createBid(int listingID, float bid, int bidderID) {
 		try {
 	        Connection connection = DatabaseConnectionDao.getInstance().getConnection();
 	        PreparedStatement ps = connection.prepareStatement("SELECT Highest_Bid FROM Listing WHERE Listing_ID = ?");
@@ -186,6 +187,18 @@ public class ListingsDao {
                 ps2.setInt(2, listingID);
                 ps2.executeUpdate();
                 ps2.close();
+                
+    	        try {
+    		        PreparedStatement ps3 = connection.prepareStatement("INSERT INTO Bid (Listing_ID, Bidder_ID, Amount_Bid) VALUES (?, ?, ?)");
+    		        ps3.setInt(1, listingID);
+    		        ps3.setInt(2, bidderID);
+    		        ps3.setFloat(3, bid);
+    				ps3.executeUpdate();
+    				ps3.close();
+    			} catch (SQLException e) {
+    				// TODO: handle exception
+    			}
+                
 	        }
 	        ps.close();
             connection.close();

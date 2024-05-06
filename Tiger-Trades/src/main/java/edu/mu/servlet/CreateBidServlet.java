@@ -31,11 +31,14 @@ public class CreateBidServlet extends HttpServlet {
 
 		
 		if (UserBid > minimumBid && UserBid > highestBid){
-			ListingsDao.createBid(listingID, UserBid);
+			HttpSession session = request.getSession();
+            Object userObj = session.getAttribute("user");
+            User user = (User) userObj;
+
+			ListingsDao.createBid(listingID, UserBid, user.getUserid());
 			request.setAttribute("listingTitle", listingTitle);
 			request.setAttribute("BidCreated", "Created!");
 			
-			HttpSession session = request.getSession();
 			Object placeholder = session.getAttribute("otherListingsPrev");
 			ArrayList<ListingPreview> ListObj = (ArrayList<ListingPreview>) placeholder;
 			
