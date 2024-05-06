@@ -74,4 +74,34 @@
     <servlet-name>CreateBidServlet</servlet-name>
     <url-pattern>/CreateBidServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>addCurrency</display-name>
+    <servlet-name>addCurrency</servlet-name>
+    <servlet-class>edu.mu.servlet.addCurrency</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>addCurrency</servlet-name>
+    <url-pattern>/addCurrency</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCurrency</display-name>
+    <servlet-name>AddCurrency</servlet-name>
+    <servlet-class>edu.mu.servlet.AddCurrency</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCurrency</servlet-name>
+    <url-pattern>/AddCurrency</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddToWalletServlet</display-name>
+    <servlet-name>AddToWalletServlet</servlet-name>
+    <servlet-class>edu.mu.servlet.AddToWalletServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddToWalletServlet</servlet-name>
+    <url-pattern>/AddToWalletServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
