@@ -232,6 +232,28 @@ public class ListingsDao {
 			ps.setInt(3, user_id);
 			ps.executeUpdate();
 			
+			ListingsDao.deletebids(listing_id);
+			ListingsDao.deleteListing(listing_id);
+			
+			ps.close();
+            connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void listingToOrderBuyOut(int listing_id, int user_id, float buyOut) {
+		Connection connection = DatabaseConnectionDao.getInstance().getConnection();
+		try {
+			Listing listing = getListingByID(listing_id);
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO Purchased_Listing (Item, Total_cost, User_id) VALUES (?, ?, ?)");
+			ps.setString(1,listing.getTitle() );
+			ps.setFloat(2, (float)(buyOut * 1.08));
+			ps.setInt(3, user_id);
+			ps.executeUpdate();
+			
+			ListingsDao.deletebids(listing_id);
 			ListingsDao.deleteListing(listing_id);
 			
 			ps.close();
@@ -275,6 +297,25 @@ public class ListingsDao {
 			int rowsDeleted = ps2.executeUpdate();
             if (rowsDeleted > 0) {
                 System.out.println("A listing was deleted!");
+            }
+            ps2.close();
+            return true;
+		} catch(SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
+	
+	public static boolean deletebids(int listing_id) {
+		Connection connection = DatabaseConnectionDao.getInstance().getConnection();
+		try {
+			PreparedStatement ps2 = connection.prepareStatement("DELETE FROM Bid WHERE Listing_ID = ?");
+			ps2.setInt(1, listing_id);
+			
+			int rowsDeleted = ps2.executeUpdate();
+            if (rowsDeleted > 0) {
+                System.out.println("A Bid was deleted!");
             }
             ps2.close();
             return true;

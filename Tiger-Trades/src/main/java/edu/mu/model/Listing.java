@@ -83,8 +83,8 @@ public class Listing {
 		return highestBid;
 	}
 
-	public void setHighestBid(float minimumBid) {
-		this.highestBid = minimumBid;
+	public void setHighestBid(float bid) {
+		this.highestBid = bid;
 	}
 
 	public float getBuyOutPrice() {

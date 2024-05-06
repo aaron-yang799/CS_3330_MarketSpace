@@ -114,4 +114,14 @@
     <servlet-name>ViewBidServlet</servlet-name>
     <url-pattern>/ViewBidServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BuyOutServlet</display-name>
+    <servlet-name>BuyOutServlet</servlet-name>
+    <servlet-class>edu.mu.servlet.BuyOutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BuyOutServlet</servlet-name>
+    <url-pattern>/BuyOutServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

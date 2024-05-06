@@ -114,7 +114,11 @@
 		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${underMinBidError}"/></p>
 	    				</c:if>
 	    				<label for="userBid"><strong>or</strong></label>
-	    				<button type='submit' class='btn btn-success w-100'><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></button>
+	    				<form action="BuyOutServlet" method="post">
+				            <input type="hidden" name="ListingID" value="${sessionScope.listing.listing_id}"/>				
+	    					<button type='submit' class='btn btn-success w-100'><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></button>
+	    				</form>
+	    				<a href="BuyOutServlet"><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></a>
 			        </div>
 			    </div>
 			</div>
