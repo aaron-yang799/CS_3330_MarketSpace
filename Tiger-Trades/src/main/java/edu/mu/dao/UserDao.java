@@ -13,7 +13,7 @@ import edu.mu.model.ListingPreview;
 
 public class UserDao {
 	
-	public static void addToWallet(int userID, int amount) {
+	public static void addToWallet(int userID, float amount) {
 		PreparedStatement ps;
 		try {
 			Connection connection = DatabaseConnectionDao.getInstance().getConnection();
@@ -22,7 +22,7 @@ public class UserDao {
 	        ResultSet rs = ps.executeQuery();
 	        
 	        if(rs.next()) {
-	        	PreparedStatement ps2 = connection.prepareStatement("UPDATE Listing SET Wallet = ? WHERE User_ID = ?");
+	        	PreparedStatement ps2 = connection.prepareStatement("UPDATE Auction_User SET Wallet = ? WHERE User_ID = ?");
                 ps2.setFloat(1, amount + rs.getFloat("Wallet"));
                 ps2.setInt(2, userID);
                 ps2.executeUpdate();

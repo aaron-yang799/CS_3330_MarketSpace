@@ -17,7 +17,7 @@ public class AddToWalletServlet extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int userId = Integer.parseInt(request.getParameter("userID"));
-		int amount = Integer.parseInt(request.getParameter("addAmount"));
+		float amount = Float.parseFloat(request.getParameter("addAmount"));
 		
 		if(amount <= 0) {
 			String negativeWalletAddError = "You cannot add a negative amount to your wallet";
