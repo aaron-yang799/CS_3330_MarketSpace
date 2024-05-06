@@ -233,6 +233,7 @@ public class ListingsDao {
 			ps.executeUpdate();
 			
 			ListingsDao.deletebids(listing_id);
+			
 			ListingsDao.deleteListing(listing_id);
 			
 			ps.close();
