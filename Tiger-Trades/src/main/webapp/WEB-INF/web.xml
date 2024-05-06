@@ -104,4 +104,14 @@
     <servlet-name>AddToWalletServlet</servlet-name>
     <url-pattern>/AddToWalletServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ViewBidServlet</display-name>
+    <servlet-name>ViewBidServlet</servlet-name>
+    <servlet-class>edu.mu.servlet.ViewBidServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ViewBidServlet</servlet-name>
+    <url-pattern>/ViewBidServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

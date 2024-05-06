@@ -1,13 +1,30 @@
 package edu.mu.model;
 
 public class Bid {
+	private int bidID;
 	private User bidder;
 	private float amountBidded;
 	private Listing listItem;
 	
-	public Bid(User bidder, float amountBidded) {
+	public Bid(User bidder, float amountBidded, Listing listItem) {
 		this.bidder = bidder;
 		this.amountBidded = amountBidded;
+		this.listItem = listItem;
+	}
+
+	public Bid(int bidID, User bidder, float amountBidded, Listing listItem) {
+		this.bidID = bidID;
+		this.bidder = bidder;
+		this.amountBidded = amountBidded;
+		this.listItem = listItem;
+	}
+
+	public int getBidID() {
+		return bidID;
+	}
+
+	public void setBidID(int bidID) {
+		this.bidID = bidID;
 	}
 
 	public User getBidder() {

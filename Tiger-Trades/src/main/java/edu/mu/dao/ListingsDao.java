@@ -9,6 +9,7 @@ import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import edu.mu.model.User;
+import edu.mu.model.Bid;
 import edu.mu.model.Listing;
 import edu.mu.model.ListingPreview;
 
@@ -220,4 +221,29 @@ public class ListingsDao {
 			e.printStackTrace();
 		}
 	}
+
+	public static ArrayList<Bid> getUserBids(User user) {
+        ArrayList<Bid> bids = new ArrayList<Bid>();
+        try {
+            PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT * FROM Bid WHERE Bidder_ID = ?");
+            ps.setInt(1, user.getUserid());
+
+            ResultSet set = ps.executeQuery();
+
+            while (set.next()) {
+                int bidId = set.getInt("Bid_ID");
+                int listingId = set.getInt("Listing_ID");
+                Listing listing = ListingsDao.getListingByID(listingId); // Fetch the Listing
+                float amountBid = set.getFloat("Amount_Bid");
+                bids.add(new Bid(bidId, user, amountBid, listing)); // Pass the User object instead of the id
+            }
+            ps.close();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+        return bids;
+    }
 }
+
+
