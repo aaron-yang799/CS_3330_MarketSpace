@@ -28,7 +28,6 @@ public class ViewListingServlet extends HttpServlet {
 			Listing listing = ListingsDao.getListingByID(listing_id);
 			
 			if(Integer.parseInt(request.getParameter("listingTime")) <= 0) {
-				ListingsDao.listingToOrder(listing);
 				HttpSession session = request.getSession();
 				session.setAttribute("listing", listing);
 				
