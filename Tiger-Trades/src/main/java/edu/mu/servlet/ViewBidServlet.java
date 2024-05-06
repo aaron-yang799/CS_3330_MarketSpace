@@ -22,10 +22,8 @@ public class ViewBidServlet extends HttpServlet {
 		HttpSession session = request.getSession();
         Object temp = session.getAttribute("user");
         User user = (User) temp;
-
-
+        
         session.setAttribute("BidList", ListingsDao.getUserBids(user));
-
 
         request.getRequestDispatcher("bids.jsp").forward(request, response);	}
 

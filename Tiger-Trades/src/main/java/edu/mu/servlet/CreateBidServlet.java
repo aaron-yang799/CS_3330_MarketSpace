@@ -48,16 +48,6 @@ public class CreateBidServlet extends HttpServlet {
 				}
 			}
 			
-			
-			
-//			Object userObj = session.getAttribute("user");
-//			User user = (User) userObj;
-//	        ArrayList<ListingPreview> list = ListingsDao.getOtherListingsPrev(user);
-//	        for(ListingPreview name: list) {
-//	        	System.out.println(name.getTitle());
-//	        }
-//	        session.setAttribute("otherListingsPrev", list);
-			
 		    RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
 		}
