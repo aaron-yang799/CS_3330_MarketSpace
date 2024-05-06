@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
@@ -38,14 +39,18 @@ public class BuyOutServlet extends HttpServlet {
 		        
         ListingsDao.listingToOrderBuyOut(listingID, user.getUserid(), buyout);
         ArrayList<ListingPreview> ListingPreview = (ArrayList<ListingPreview>) session.getAttribute("otherListingsPrev");
+
+        session.setAttribute("boughtOutItemTitle", listing.getTitle());
         
-        for(ListingPreview listingPrev : ListingPreview) {
-        	if(listingPrev.getListing_id() == listingID) {
-        		ListingPreview.remove(listingPrev);
-        	}
+        Iterator<ListingPreview> iterator = ListingPreview.iterator();
+        
+        while (iterator.hasNext()) {
+            ListingPreview listingPrev = iterator.next();
+            if (listingPrev.getListing_id() == listingID) {
+                iterator.remove();
+            }
         }
-        
-        
+		request.setAttribute("boughtOut", "Created!");
 		request.getRequestDispatcher("index.jsp").forward(request, response);	
 	}
 
