@@ -86,7 +86,7 @@
 			            <p><strong>Posted:</strong> <fmt:formatDate value="${sessionScope.listing.timePosted}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Ends:</strong> <fmt:formatDate value="${sessionScope.listing.timeEnd}" pattern="MMMM-dd-yyyy"/></p>
 			            <p><strong>Minimum Bid:</strong> $<fmt:formatNumber value="${sessionScope.listing.minimumBid}"/></p>
-			            <p><strong>Highest Bid:</strong> $<fmt:formatNumber value="${sessionScope.listing.highestBid}"/></p>
+			            <p><strong>Highest Bid:</strong> $<span id="highestBid"></span></p>
 			        </div>
 			        <div class="col">
 			            <label for="userBid"><strong>Submit a Bid (USD)</strong></label>
@@ -118,5 +118,9 @@
         <%@ include file="createListingButton.jsp" %>
     </div>
 </body>
-
+<script>
+    var highestBid = ${sessionScope.listing.highestBid};
+    var formattedBid = highestBid.toFixed(2);
+    document.getElementById("highestBid").textContent = formattedBid;
+</script>
 </html>

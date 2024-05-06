@@ -57,6 +57,7 @@
 				<div class="col	mr-3 pt-3 pl-3 pr-3pb-1">
 					<form action="AddToWalletServlet" method="post">
 						<input type="hidden" name="userID" value="${sessionScope.user.getUserid()}"/>
+						<input type="hidden" name="wallet" value="${sessionScope.user.getWallet()}"/>
 						<h5><strong>Add TigerTokens to Wallet</strong></h5>
 						<div class="form-group">
 							<label for="addAmount">💲</label>
