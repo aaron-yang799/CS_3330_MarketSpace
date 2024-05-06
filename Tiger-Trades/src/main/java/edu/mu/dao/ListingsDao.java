@@ -147,6 +147,7 @@ public class ListingsDao {
 		return listings;
 	}
 	
+	
 	public static Listing getListingByID(int ID) {
 		Listing listing = null;
 		try {
@@ -209,14 +210,14 @@ public class ListingsDao {
 		}
 	}
 	
-	public static void listingToOrder(Listing listing) {
+	public static void listingToOrder(int listing_id, int user_id) {
 		Connection connection = DatabaseConnectionDao.getInstance().getConnection();
 		try {
-			PreparedStatement ps = connection.prepareStatement("INSERT INTO Auction_Order (Item, Arrival_Date, Total_Cost, Order_Status) VALUES (?, ?, ?, ?)");
-			ps.setInt(1, 66);
-			ps.setDate(2, listing.getTimeEnd());
-			ps.setFloat(3, listing.getHighestBid() + 10);
-			ps.setString(4, "Packing");
+			Listing listing = getListingByID(listing_id);
+			PreparedStatement ps = connection.prepareStatement("INSERT INTO Purchased_Listing (Item, Total_cost, User_id) VALUES (?, ?, ?)");
+			ps.setString(1,listing.getTitle() );
+			ps.setFloat(2, (float)(listing.getHighestBid() * 1.08));
+			ps.setInt(3, user_id);
 			ps.executeUpdate();
 			
 			PreparedStatement ps2 = connection.prepareStatement("DELETE FROM Listing WHERE Listing_ID = ?");
@@ -234,7 +235,8 @@ public class ListingsDao {
 			e.printStackTrace();
 		}
 	}
-
+	
+	
 	public static ArrayList<Bid> getUserBids(User user) {
         ArrayList<Bid> bids = new ArrayList<Bid>();
         try {

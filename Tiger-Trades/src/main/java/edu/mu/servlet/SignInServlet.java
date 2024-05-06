@@ -21,7 +21,6 @@ public class SignInServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		SignInDao Authenticate = new SignInDao(request.getParameter("email"), request.getParameter("password"));
 		User user = Authenticate.Authenticate();
 	
@@ -39,11 +38,9 @@ public class SignInServlet extends HttpServlet {
 	        for(ListingPreview name: list) {
 	        	System.out.println(name.getTitle());
 	        }
-	        session.setAttribute("otherListingsPrev", list);
-	       
 	        
-	        System.out.println(session.getAttribute("otherListingsPrev"));
-	        //session.setAttribute("userName", user.getUsername()); 
+	        // store other peoples listings into the session. Still takes forever!
+	        session.setAttribute("otherListingsPrev", list);
 
 	        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
 			rd.forward(request, response);
