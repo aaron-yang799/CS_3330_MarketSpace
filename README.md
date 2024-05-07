@@ -7,4 +7,10 @@ Tiger-Trades is a online auctioning website designed for Mizzou students. Users 
 - Viet Nguyen
 - Zach Snyder
 
+### Usage
+
+This project was developed using Java Dev Kit version 21. In order to run this code you will need to have JDK 21 selected as you Java Runtime Environment within your IDE. In addition, this project was tested with Apache Tomcat version 10.1 as the local hosting enviroment, you will need this to run the project.
+
+To run, right click on the project file and click run on server, then select the correct Apache Tomcat version.
+
 
