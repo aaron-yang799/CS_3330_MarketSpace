@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 
 import edu.mu.model.User;
+import jakarta.servlet.http.HttpSession;
 import edu.mu.model.Bid;
 import edu.mu.model.Listing;
 import edu.mu.model.ListingPreview;
@@ -308,7 +309,14 @@ public class ListingsDao {
 	
 	
 	public static ArrayList<Bid> getUserBids(User user) {
+		
         ArrayList<Bid> bids = new ArrayList<Bid>();
+        
+       
+		
+		
+		
+		
         try {
             PreparedStatement ps = DatabaseConnectionDao.getInstance().getConnection().prepareStatement("SELECT * FROM Bid WHERE Bidder_ID = ?");
             ps.setInt(1, user.getUserid());
