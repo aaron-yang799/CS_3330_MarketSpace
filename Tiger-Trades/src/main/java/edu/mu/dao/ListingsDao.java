@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
+
 import edu.mu.model.User;
 import edu.mu.model.Bid;
 import edu.mu.model.Listing;
@@ -278,10 +281,23 @@ public class ListingsDao {
 			ps.setFloat(2, (float)(buyOut * 1.08));
 			ps.setInt(3, user_id);
 			ps.executeUpdate();
+
+			
+			PreparedStatement ps2 = connection.prepareStatement("SELECT Wallet FROM Auction_User WHERE User_ID = ?");
+			ps2.setInt(1, user_id);
+			ResultSet rs2 = ps2.executeQuery();
+			
+			if(rs2.next()) {
+				PreparedStatement ps3 = connection.prepareStatement("UPDATE Auction_User SET Wallet = ? WHERE User_ID = ?");
+				ps3.setInt(2, user_id);
+				ps3.setFloat(1, ((float)rs2.getFloat("Wallet") - (float)(buyOut * 1.08)));
+				ps3.executeUpdate();
+				ps3.close();
+			}
 			
 			ListingsDao.deletebids(listing_id);
 			ListingsDao.deleteListing(listing_id);
-			
+			ps2.close();
 			ps.close();
             connection.close();
 		} catch (SQLException e) {
