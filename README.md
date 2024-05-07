@@ -16,4 +16,4 @@ To run, right click on the project file and click run on server, then select the
 ## Dependancies
 
 	
-[Apache Tomcat 10.1](https://www.example.com](https://tomcat.apache.org/download-10.cgi)
+[Apache Tomcat 10.1](https://tomcat.apache.org/download-10.cgi)
