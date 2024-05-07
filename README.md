@@ -13,4 +13,7 @@ This project was developed using Java Dev Kit version 21. In order to run this c
 
 To run, right click on the project file and click run on server, then select the correct Apache Tomcat version.
 
+## Dependancies
 
+	
+[Apache Tomcat 10.1]([https://www.example.com](https://tomcat.apache.org/download-10.cgi))
