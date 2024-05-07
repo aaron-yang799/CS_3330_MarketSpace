@@ -19,7 +19,7 @@ To run, right click on the project file and click run on server, then select the
 
 [Apache Tomcat 10.1](https://tomcat.apache.org/download-10.cgi)
 
-[MySQL Connector Java 8.4]([https://tomcat.apache.org/download-10.cgi](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j/8.4.0))
+[MySQL Connector Java 8.4](https://mvnrepository.com/artifact/com.mysql/mysql-connector-j/8.4.0)
 
 [Jbcrypt 0.4](https://mvnrepository.com/artifact/org.mindrot/jbcrypt/0.4)
 
