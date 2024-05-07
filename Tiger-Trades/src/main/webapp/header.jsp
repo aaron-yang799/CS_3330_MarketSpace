@@ -123,10 +123,8 @@
                             <a href="https://github.com/aaron-yang799/CS_3330_MarketSpace"><img src="images/github-white.png" alt="github" height="32px" width="32px" class="mb-1"></a>
                         </div>
                     </div>
-                    <div class="col-4 justify-content-center align-items-center mt-3 mb-0 h5" style="font-family: 'Graphik';">
-                    	<div style="text-align: center">
-                    		<p><%= thisPage != null ? thisPage : "" %></p>
-                    	</div>
+                    <div class="col-4 d-flex justify-content-center align-items-center h5" style="font-family: 'Graphik';">
+                    	<p class = "mb-0"><%= thisPage != null ? thisPage : "" %></p>
                     </div>
                     <div class="col-4 link-container justify-content-end">
                         <% 
