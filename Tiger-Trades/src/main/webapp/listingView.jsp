@@ -118,6 +118,9 @@
 				            <input type="hidden" name="ListingID" value="${sessionScope.listing.listing_id}"/>				
 	    					<button type='submit' class='btn btn-success w-100'><strong>Buy now for $${sessionScope.listing.buyOutPrice}</strong></button>
 	    				</form>
+	    				<c:if test="${not empty brokeAhhUserBuyOutError}">
+		            		<p style="color: red; margin-bottom: 0px;"><c:out value="${brokeAhhUserBuyOutError}"/></p>
+	    				</c:if>
 			        </div>
 			    </div>
 			</div>

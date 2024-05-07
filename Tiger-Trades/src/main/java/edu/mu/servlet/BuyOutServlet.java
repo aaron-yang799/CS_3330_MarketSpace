@@ -30,12 +30,20 @@ public class BuyOutServlet extends HttpServlet {
         Object userObj = session.getAttribute("user");
         User user = (User) userObj;
         
-		int listingID = Integer.parseInt(request.getParameter("ListingID"));
+        int listingID = Integer.parseInt(request.getParameter("ListingID"));
 		Listing listing = ListingsDao.getListingByID(listingID);
 		if(listing == null) {
 			request.getRequestDispatcher("index.jsp").forward(request, response);	
 		}
 		float buyout = listing.getBuyOutPrice();
+		
+		if (user.getWallet() < buyout) {
+			String brokeAhhUserBuyOutError = "You don't have enough money in your wallet to buy this.";
+			request.setAttribute("brokeAhhUserBuyOutError", brokeAhhUserBuyOutError);
+			request.getRequestDispatcher("listingView.jsp").forward(request, response);
+		}
+		
+
 		        
         ListingsDao.listingToOrderBuyOut(listingID, user.getUserid(), buyout);
         ArrayList<ListingPreview> ListingPreview = (ArrayList<ListingPreview>) session.getAttribute("otherListingsPrev");
